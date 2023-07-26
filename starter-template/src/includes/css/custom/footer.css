@@ -1,0 +1,9 @@
+footer {
+    @apply bg-black/90 text-center !text-white grid grid-cols-1 sm:grid-cols-12 pb-2;
+}
+
+
+
+.footer-headlines{
+    @apply mt-5 text-xl font-bold underline decoration-blue-500/40 decoration-4;
+}

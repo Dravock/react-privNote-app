@@ -1,0 +1,66 @@
+body{
+    @apply min-h-screen w-full m-0 p-0 ;
+}
+
+.box-debugger{
+    @apply border border-red-600;
+}
+
+
+
+ul {
+    list-style-type: circle;
+}
+
+h1{
+    @apply text-3xl ;
+}
+h2{
+    @apply text-2xl ;
+}
+h3{
+    @apply text-xl ;
+}
+h4{
+    @apply text-lg ;
+}
+
+/* UNDERLINE HOVER EFFECT */
+.hover-underline-animation {
+    display: inline-block;
+    position: relative;
+    @apply text-black text-2xl ;
+}
+
+.hover-underline-animation::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    transform: scaleX(0);
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    transform-origin: bottom right;
+    transition: transform 0.25s ease-out;
+    @apply bg-[#f5a523] ;
+}
+
+.hover-underline-animation:hover::after {
+    transform: scaleX(1);
+    transform-origin: bottom left;
+}
+
+.animate-height{
+    overflow: hidden;
+    max-height: 0px;
+}
+
+.open{
+    transition: 700ms max-height ;
+    max-height: 350px;
+}
+
+.closed{
+    transition: 700ms max-height ;
+    max-height: 0px;
+}

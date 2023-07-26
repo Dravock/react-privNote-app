@@ -1,0 +1,37 @@
+.btn {
+    @apply
+    bg-blue-500
+    hover:bg-blue-400  
+    text-white
+    text-base 
+    sm:text-lg
+
+    sm:font-bold 
+    p-2
+    sm:m-5
+    m-1
+    rounded-sm;
+}
+
+.btn-green {
+    @apply 
+    bg-green-600 
+    hover:bg-green-500
+    font-bold
+    p-2
+    m-5
+    rounded-sm;
+}
+
+.btn-red {
+    @apply
+    text-black 
+    bg-red-700/95 
+    hover:bg-red-500
+    sm:font-bold
+    p-1
+    sm:p-2
+    sm:m-5
+    m-1
+    rounded-sm;
+}
