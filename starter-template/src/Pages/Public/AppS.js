@@ -1,21 +1,37 @@
-import React from 'react'
-import logo from '../../logo.svg';
+import React, { useState } from 'react'
+import Start from './Start'
+import WriteMessage from './WriteMessage'
+import ReadMessage from './ReadMessage'
 
 function App() {
+
+  const [page, setPage] = useState({start: true, writeMessage: false , readMessage: false})
+  const url = new URL(window.location.href)
+  const searchParams = new URLSearchParams(url.href);
+
+  for (const p of searchParams) {
+    console.log(p);
+  }
+  
+
+
+
   return (
-    <div className="App">
-    <header className="App-header">
-      <img src={logo} className="App-logo" alt="logo" />
-      <a
-        className="App-link"
-        href="https://reactjs.org"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        Learn React
-      </a>
-    </header>
-  </div>
+    <div className="App container">
+      {
+        page.start ? <Start setPage={setPage} />
+        : null 
+      }
+      {
+        page.writeMessage ? <WriteMessage setPage={setPage}/>
+        : null 
+      }
+      {
+        page.readMessage ? <ReadMessage setPage={setPage}/>
+        : null 
+      }
+
+    </div>
   )
 }
 

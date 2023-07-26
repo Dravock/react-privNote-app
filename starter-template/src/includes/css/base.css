@@ -1,66 +1,42 @@
-body{
-    @apply min-h-screen w-full m-0 p-0 ;
+:root {
+    --page-width: 1200px;
+    --grid-columns: 12 ;
+    --primary-color: #007bff;
+    --secondary-color: #6c757d;
+    --success-color: #28a745;
+    --info-color: #17a2b8;
+    --warning-color: #ffc107;
+    --danger-color: #dc3545;
+    --light-color: #f8f9fa;
+    --dark-color: #343a40;
+    --breakpoint-sm: 576px;
+    --breakpoint-md: 768px;
+    --breakpoint-lg: 992px;
+    --breakpoint-xl: 1200px;
+    --font-family-sans-serif: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Helvetica Neue", Arial, sans-serif;
+    --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 }
 
-.box-debugger{
-    @apply border border-red-600;
+body {
+    background-color: rgba(0, 0, 0, 0.87);
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
+.container {
 
-
-ul {
-    list-style-type: circle;
-}
-
-h1{
-    @apply text-3xl ;
-}
-h2{
-    @apply text-2xl ;
-}
-h3{
-    @apply text-xl ;
-}
-h4{
-    @apply text-lg ;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 2rem
 }
 
-/* UNDERLINE HOVER EFFECT */
-.hover-underline-animation {
-    display: inline-block;
-    position: relative;
-    @apply text-black text-2xl ;
-}
-
-.hover-underline-animation::after {
-    content: '';
-    position: absolute;
-    width: 100%;
-    transform: scaleX(0);
-    height: 2px;
-    bottom: 0;
-    left: 0;
-    transform-origin: bottom right;
-    transition: transform 0.25s ease-out;
-    @apply bg-[#f5a523] ;
-}
-
-.hover-underline-animation:hover::after {
-    transform: scaleX(1);
-    transform-origin: bottom left;
-}
-
-.animate-height{
-    overflow: hidden;
-    max-height: 0px;
-}
-
-.open{
-    transition: 700ms max-height ;
-    max-height: 350px;
-}
-
-.closed{
-    transition: 700ms max-height ;
-    max-height: 0px;
+.App {
+    background-color: #f8f9fa;
+    place-self: center;
+    border-radius: 10px;
 }
