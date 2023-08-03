@@ -32,12 +32,16 @@ function getMessage() {
         
         $query = new App_Data();
         $result = $query->getData($message_id);
-        $delete_message = $query->deleteData($message_id);
-        
+        if(!$result) {
+            throw new Exception('Something went wrong no message found');
+            return;
+        }
+
         http_response_code(200);
         echo json_encode($result);
+        return;
     } catch (Throwable $e) {
-        http_response_code(500);
+        http_response_code(404);
     }
 }
 
@@ -50,7 +54,7 @@ function postMessage () {
         $v4_uuID = gen_uuid();
 
         if(!$query->postData($obj,$v4_uuID)) {
-            throw new Exception('Something went wrong');
+            throw new Exception('Something went wrong no message posted');
             return;
         }
 
@@ -58,23 +62,24 @@ function postMessage () {
         echo $v4_uuID;
         return;
     } catch (Throwable $e) {
-        http_response_code(500);
+        http_response_code(404);
     }
 }
 
 function removeMessage () {
     try {
+        $message_id = $_GET['id'];
         $post_json  = file_get_contents('php://input');
         $obj = json_decode($post_json);
         $query = new App_Data();
 
-        if(!$query->deleteData($obj->id)) {
-            throw new Exception('Something went wrong');
+        if(!$query->deleteData($message_id)) {
+            throw new Exception('Something went wrong no message deleted');
             return;
         }
         http_response_code(200);
     } catch (Throwable $e) {
-        http_response_code(500);
+        http_response_code(404);
     }
 }
 

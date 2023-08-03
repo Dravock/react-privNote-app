@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from '../../Includes/css/custom/loading.module.css';
+import styles from '../../includes/css/custom/loading.module.css';
 
 const LoadingScreen = (props) => {
 
