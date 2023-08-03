@@ -1,7 +1,17 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import LoadingState from '../../includes/enums/LoadingState';
+import LoadingScreen from '../../components/loading_spinner/Loadingscreen';
 
 function ShowLink(props) {
-  const { link_id } = props
+  const { link_id,loading,loadingText } = props
+
+  useEffect(() => {
+    if(loading === LoadingState.Active) {
+      const getElement = document.getElementById("id-ShowMessageLink")
+      getElement.classList.add('hidden')
+    }
+  }, [loading])
+  
 
   const copy_to_clipboard = () => {
     const copyText = document.getElementById("pn_copy_clip");
@@ -13,7 +23,8 @@ function ShowLink(props) {
 
   return (
     <>
-      <div className='pn_showLink--desc mb-4'>
+    {loading === LoadingState.Active && <LoadingScreen text={loadingText}/>}
+      <div id="id-ShowMessageLink" className='pn_showLink--desc mb-4'>
         <h1 className='text-3xl mb-2'>Hier ist dein <span className='text-green-600 font-bold'>Geheimer Link</span> ,</h1>
         <h2 className='text-xl '>kopiere ihn und sende ihn an den Empfänger</h2>
       </div>
@@ -29,7 +40,6 @@ function ShowLink(props) {
       <div className='pn__button-group'>
         <a href={process.env.REACT_APP_BASE_URL} className='pn__btn rounded-lg pt-3'><span className='text-2xl md:text-3xl mt-8'>🏠</span> Zur Startseite zurück !</a>
       </div>
-      
     </>
   )
 }

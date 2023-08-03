@@ -29,7 +29,6 @@ class App_Data extends Database{
 
     }
 
-    
     public function deleteData($message_id){
         $stmt = $this->conn->prepare("DELETE FROM $this->data WHERE $this->data.id = :message_id");
         $stmt->bindParam(':message_id',$message_id);

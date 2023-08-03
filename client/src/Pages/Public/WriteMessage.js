@@ -12,7 +12,7 @@ function WriteMessage(props) {
     const [link,setLink] = useState('')
 
     const [loading,setLoading] = useState(LoadingState.Inactive)
-    const [loadingText,setLoadingText]=useState(LoadingMessages.Auth)
+    const [loadingText,setLoadingText]=useState(LoadingMessages.createLink)
 
     const [showLinkPage,setShowLinkPage] = useState(false)
 
@@ -37,7 +37,7 @@ function WriteMessage(props) {
 
 return (
     <div className=''>
-        {!showLinkPage ? <CreateMessageLink changePage={()=>changePage()} getMessageLink={()=>getMessageLink()} setMessge={setMessge} message={message}/> : <ShowLink link_id={link}/> }
+        {!showLinkPage ? <CreateMessageLink changePage={()=>changePage()} getMessageLink={()=>getMessageLink()} setMessge={setMessge} message={message}/> : <ShowLink link_id={link} loading={loading} loadingText={loadingText}/> }
     </div>
 
 )}

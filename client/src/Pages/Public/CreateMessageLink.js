@@ -1,10 +1,9 @@
 import React, { useState } from 'react'
 import LoadingState from '../../includes/enums/LoadingState'
 import LoadingScreen from '../../components/loading_spinner/Loadingscreen'
-import LoadingMessages from '../../includes/enums/LoadingMessages'
 
 function CreateMessageLink(props) {
-    const { changePage,getMessageLink ,message,setMessge} = props
+    const { changePage,getMessageLink ,message,setMessge,loading ,loadingText } = props
 
 
     const inputListener = (e) => {
@@ -15,6 +14,7 @@ function CreateMessageLink(props) {
 
     return (
     <div>
+        
         <div className='pn__button-group mb-8 text-left'>
             <button className="pn__btn--red rounded-xl px-4 font-bold" onClick={()=>changePage()}><span className='text-xl'>🔙Zurück</span></button>
         </div>

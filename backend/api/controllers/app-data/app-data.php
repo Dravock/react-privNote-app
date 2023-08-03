@@ -29,6 +29,7 @@ function gen_uuid() {
 function getMessage() {
     try {
         $message_id = $_GET['id'];
+        $test =  $_SERVER['REMOTE_ADDR'];  
         
         $query = new App_Data();
         $result = $query->getData($message_id);

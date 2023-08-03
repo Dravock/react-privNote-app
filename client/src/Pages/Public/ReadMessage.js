@@ -8,7 +8,7 @@ function ReadMessage(props) {
   const { message_id } = props
 
   const [loading,setLoading] = useState(LoadingState.Inactive)
-  const [loadingText,setLoadingText]=useState(LoadingMessages.Auth)
+  const [loadingText,setLoadingText]=useState(LoadingMessages.GeneralWaiting)
 
   const [data , setData] = useState("")
 
@@ -47,8 +47,8 @@ function ReadMessage(props) {
   return (
     <div>
       {loading === LoadingState.Active && <LoadingScreen text={loadingText}/>}
-      <h1 className='text-3xl px-40 mb-4'>Deine Private Nachricht ist hier</h1>
-      <div className='flex w-full bg-[#222222c0] min-h-40 mx-auto text-left flex-wrap px-2 py-3'>
+      <h1 className='text-3xl md:px-40 mb-4'>Deine Private Nachricht ist hier</h1>
+      <div className='flex w-full bg-[#222222c0] md:min-h-40 mx-auto text-left flex-wrap px-2 py-3'>
         <p className='text-white'>{data && data.message }</p>
       </div>
       <div className='pn__button-group mt-4 '>
