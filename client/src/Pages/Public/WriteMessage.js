@@ -16,6 +16,7 @@ function WriteMessage(props) {
     const [showLinkPage,setShowLinkPage] = useState(false)
 
     const [captachNumber,setCaptachNumber] = useState({number1:0,number2:0,result:0})
+    const [pop_window_status,setPopWindowStatus] = useState({error:false,warning:false,success:false})
 
     const changePage = () => {
         setPage({start: true, writeMessage: false , readMessage: false})
@@ -27,9 +28,8 @@ function WriteMessage(props) {
 
     const generateCaptchaNr = () => {
         const number1 = Math.floor(Math.random(1)*10)
-
         const number2 = Math.floor(Math.random(1)*10)
-        console.log(number1,number2)
+
         setCaptachNumber({...captachNumber,number1:number1,number2:number2,result:number1+number2})
         resetCaptcha()
     }
@@ -39,19 +39,41 @@ function WriteMessage(props) {
         get_captacha_val.value = ''
     }
 
+    const showPopUp = (popUp_State) => {
+        switch (popUp_State) {
+            case "error":
+                const get_pop_up_warning = document.getElementById('pn_warning_pop_up')
+                get_pop_up_warning.classList.remove('hidden')
+                break;
+            case "warning":
+                const get_pop_up_error = document.getElementById('pn_error_pop_up')
+                get_pop_up_error.classList.remove('hidden')
+                break;
+        
+            default:
+                break;
+        }
+
+        
+        
+    }
+
     const closePopUp = (page) => {
         switch (page) {
             case "error":
                 const get_pop_up_window = document.getElementById('pn_error_pop_up')
                 get_pop_up_window.classList.add('hidden')
+                setPopWindowStatus({...pop_window_status,error:false})
                 break;
             case "warning":
                 const get_pop_up_window2 = document.getElementById('pn_warning_pop_up')
                 get_pop_up_window2.classList.add('hidden')
+                setPopWindowStatus({...pop_window_status,warning:false})
                 break;
             case "success":
                 const get_pop_up_window3 = document.getElementById('pn_success_pop_up') ?? null
                 get_pop_up_window3.classList.add('hidden')
+                setPopWindowStatus({...pop_window_status,success:false})
                 break;
             default:
                 break;
@@ -74,25 +96,23 @@ function WriteMessage(props) {
                 })
                 setShowLinkPage(true)
             }else{
-                const get_pop_up = document.getElementById('pn_warning_pop_up')
-                get_pop_up.classList.remove('hidden')
+                setPopWindowStatus({...pop_window_status,warning:true})
+                showPopUp('warning')
             }
         }else{
-            const get_pop_up = document.getElementById('pn_error_pop_up')
-            get_pop_up.classList.remove('hidden')
+            setPopWindowStatus({...pop_window_status,error:true})
+            showPopUp('error')
         }
     }
 
-console.log(message)
-
 return (
-    <>
+    <main>
         {!showLinkPage ? 
-                <CreateMessageLink changePage={changePage} getMessageLink={()=>getMessageLink()} setMessge={setMessge} message={message} submit={submit} generateCaptchaNr={generateCaptchaNr} captachNumber={captachNumber} closePopUp={closePopUp}/> 
+                <CreateMessageLink changePage={changePage} getMessageLink={()=>getMessageLink()} setMessge={setMessge} message={message} submit={submit} generateCaptchaNr={generateCaptchaNr} captachNumber={captachNumber} closePopUp={closePopUp} setPopWindowStatus={setPopWindowStatus} pop_window_status={pop_window_status}/> 
                 : 
-                <ShowLink link_id={link} loading={loading} loadingText={loadingText} closePopUp={closePopUp}/> 
+                <ShowLink link_id={link} loading={loading} loadingText={loadingText} closePopUp={closePopUp} setPopWindowStatus={setPopWindowStatus} pop_window_status={pop_window_status}/> 
         }
-    </>
+    </main>
 
 )}
 

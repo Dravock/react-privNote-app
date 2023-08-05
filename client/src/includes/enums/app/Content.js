@@ -33,7 +33,12 @@ const Content = {
         header_part_1:"Hier ist dein ",
         header_part_2:"Geheimer Link,",
         subHeader:"Sende diesen Link an den Empfänger. Nach dem öffnen wird die Nachricht für immer gelöscht"
-    }
+    },
+    ReadMessage: {
+        header: 'Lass uns deine Nachricht lesen 🤓',
+        subHeader: 'Gib den geheimen Link ein, um die Nachricht zu lesen',
+    },
+
 }       
 
 export default Content

@@ -2,7 +2,8 @@ import React, { useEffect, useState } from 'react'
 import Content from '../../includes/enums/app/Content'
 
 function CreateMessageLink(props) {
-    const { changePage,getMessageLink ,message,setMessge,submit,generateCaptchaNr,captachNumber,closePopUp} = props
+ 
+    const { changePage,getMessageLink ,message,setMessge,submit,generateCaptchaNr,captachNumber,closePopUp,pop_window_status} = props
     const [pageContent,setPageContent] = React.useState(Content.WriteMessage)
 
     useEffect(() => {
@@ -16,24 +17,28 @@ function CreateMessageLink(props) {
     }
 
     return (
-    <div className=''>
+    <>
         <section className='description bg-gradient-to-b from-blue-500 to-blue-700 rounded-t-lg'>        
             <div className=' px-10 md:px-20 '>
                 <h1 className="text-2xl md:text-4xl py-4 font-bold ">{pageContent.header}</h1>
             </div>
         </section>
-        <section id="pn_error_pop_up" className='pb-8 hidden'>
-            <div className='h-full w-full bg-red-600 flex justify-center items-center'>
-                <h2 className='text-xl md:text-3xl font-bold px-4 md:px-8 pb-4 pt-4'>Du kannst keine Leere Nachricht erstellen!</h2>
-                <button className='text-4xl cursor-pointer font-extrabold' onClick={()=>closePopUp("error")}>X</button>
-            </div>
-        </section>
-        <section id="pn_warning_pop_up" className='pb-8 hidden'>
-            <div className='h-full w-full bg-yellow-600 flex justify-center items-center'>
-                <h2 className='text-xl md:text-3xl font-bold px-4 md:px-8 pb-4 pt-4'>Authentifikation fehlgelschagen nochmal versuchen</h2>
-                <button className='text-4xl cursor-pointer font-extrabold' onClick={()=>closePopUp("warning")}>X</button>
-            </div>
-        </section>
+
+                            <section id="pn_error_pop_up" className='pb-8 hidden'>
+                                <div className='h-full w-full bg-red-600 flex justify-center items-center'>
+                                    <h2 className='text-xl md:text-3xl font-bold px-4 md:px-8 pb-4 pt-4'>Du kannst keine Leere Nachricht erstellen!</h2>
+                                    <button className='text-4xl cursor-pointer font-extrabold' onClick={()=>closePopUp("error")}>X</button>
+                                </div>
+                            </section>
+        
+        
+                            <section id="pn_warning_pop_up" className='pb-8 hidden'>
+                                <div className='h-full w-full bg-yellow-600 flex justify-center items-center'>
+                                    <h2 className='text-xl md:text-3xl font-bold px-4 md:px-8 pb-4 pt-4'>Authentifikation fehlgelschagen nochmal versuchen</h2>
+                                    <button className='text-4xl cursor-pointer font-extrabold' onClick={()=>closePopUp("warning")}>X</button>
+                                </div>
+                            </section>
+
         <section className='pt-8 pb-8'>
             <form onSubmit={submit} className='pn__form'>
                 <div className='pn-text-field-box mx-8'>
@@ -54,7 +59,7 @@ function CreateMessageLink(props) {
                 </div>
             </form>
         </section>  
-    </div> 
+    </> 
     )
 }
 
