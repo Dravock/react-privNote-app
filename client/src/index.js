@@ -7,7 +7,10 @@ import Apps from './Pages/Public/AppS';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
+    <>
     <Apps />
+
+    </>
 );
 
 // If you want to start measuring performance in your app, pass a function

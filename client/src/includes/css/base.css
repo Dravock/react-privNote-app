@@ -62,3 +62,31 @@ body {
     place-self: center;
     border-radius: 10px;
 }
+
+
+.animteFooter-height {
+    max-height: 50px;
+    overflow-y: hidden;
+}
+
+footer .animteFooter-height:hover{
+    @apply max-h-[35rem] sm:max-h-60;
+    transition: max-height 250ms ease-in;
+}
+
+footer .animteFooter-height-mobile{
+    @apply max-h-[35rem] sm:max-h-60;
+    transition: max-height 250ms ease-in;
+}
+
+
+
+footer .footer__content{
+    display: none;
+}
+
+footer .animteFooter-height:hover  .footer__content{
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+}
+
