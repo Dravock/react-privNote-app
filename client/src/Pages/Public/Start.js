@@ -3,12 +3,12 @@ import Content from '../../includes/enums/app/Content.js'
 
 function Start(props) {
     const { setPage } = props
+
     const [pageContent, setPageContent] = useState(Content.Startseite)
     const [detailOptions, setDetailOptions] = useState();
 
 
 useEffect(() => {
-
     getDetailOption()
 }, []);
 
@@ -32,11 +32,6 @@ const getDetailOption = () => {
     });
     setDetailOptions(detailOptions_func_arr)
 }
-
-
-
-
-
 
 return (
 <>
@@ -74,7 +69,7 @@ return (
         }
         <div className='flex justify-center items-center'>
             <button className="pn__btn rounded-lg mt-0 mb-4" onClick={()=>changePage()}>
-                Nachricht schreiben <span className='text-2xl'>🎉</span>
+                Nachricht schreiben <span className='text-xl md:text-2xl'>🎉</span>
             </button>
         </div>
     </main>
