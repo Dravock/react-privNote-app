@@ -40,7 +40,7 @@ return (
         <p className="sm:text-sm mt-2 mx-4">{pageContent.header.subHeader}</p>
     </header>
 
-    <main className='md:px-16 lg:px-28 pt-2 sm:pt-8 text-left sm:text-center'>
+    <main className='md:px-16 lg:px-28 pt-4 sm:pt-8 text-left sm:text-center'>
         {detailOptions && detailOptions.map((option,index) => {
             if(index === 0){
                 return  <section key={index} className='mb-8 flex justify-center ' >          

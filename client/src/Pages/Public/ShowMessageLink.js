@@ -1,24 +1,16 @@
-import React, { useEffect } from 'react'
+import React, { useState } from 'react'
 import LoadingState from '../../includes/enums/LoadingState';
 import LoadingScreen from '../../components/loading_spinner/Loadingscreen';
 import Content from '../../includes/enums/app/Content';
 
 function ShowLink(props) {
   const { link_id,loading,loadingText } = props
-  const [pageContent,setPageContent] = React.useState(Content.ShowMessageURL)
 
-  useEffect(() => {
-    return
-    if(loading === LoadingState.Active) {
-      const getElement = document.getElementById("id-ShowMessageLink")
-      getElement.classList.add('hidden')
-    }
-  }, [loading])
-  
+  const [pageContent,setPageContent] = useState(Content.ShowMessageURL)
 
   const copy_to_clipboard = () => {
-    
     const copyText = document.getElementById("pn_copy_clip");
+
     if(copyText) {
       const link_copy = copyText.value
       navigator.clipboard.writeText(link_copy);
@@ -29,10 +21,7 @@ function ShowLink(props) {
   return (
     <>
     {loading === LoadingState.Active && <LoadingScreen text={loadingText}/>}
-
-      
       <div className='shadow-2xl   relative sm:bg-black/30'>
-
         <section className='mb-4'>        
           <div id="id-ShowMessageLink" className='pn_showLink--desc  bg-gradient-to-b from-blue-500 to-blue-700'>
             <h1 className='text-2xl sm:text-3xl mb-2 font-bold'>{pageContent.header_part_1}<span className='text-green-600 font-bold'>{pageContent.header_part_2}</span></h1>
@@ -52,18 +41,15 @@ function ShowLink(props) {
 
         <section className=''>
           <div className='pn__button-group  flex flex-col sm:flex-row justify-center mt-8 pb-8 mx-16'>
-              <a href={process.env.REACT_APP_BASE_URL} className='pn__btn rounded-lg  flex justify-center align-middle relative pr-10  sm:pl-10' title="Startseite">
+              <a href={process.env.REACT_APP_BASE_URL} className='pn__btn rounded-lg  flex justify-center align-middle relative pr-10  sm:pl-10 ' title="Startseite">
                 <span className='absolute text-2xl md:text-3x top-0  right-2'>🏠</span> Zur Startseite zurück !
               </a>
-              <a href={`whatsapp://send?text=${process.env.REACT_APP_BASE_URL_PARAM_ID+link_id}`} className="pn__btn rounded-lg flex justify-center align-middle relative pr-10 sm:pr-14" title="Auf WhatsApp teilen">
+              <a href={`whatsapp://send?text=${process.env.REACT_APP_BASE_URL_PARAM_ID+link_id}`} className="pn__btn bg-[#4FCE5D] hover:bg-[#58d066d2] rounded-lg flex justify-center align-middle relative pr-10 sm:pr-14" title="Auf WhatsApp teilen">
                 Teilen über WhatsApp! <span className='absolute text-2xl md:text-3x top-1 right-2'>🚀</span>
               </a>
             </div>
         </section>
-   
-
       </div>
-  
     </>
   )
 }
