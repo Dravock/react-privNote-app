@@ -46,10 +46,6 @@ function App() {
     }
   }  
 
-  const open_footer_mobile = () => {
-    console.log('open_footer_mobile');
-  }
-
 return (
   <>
   <div className="App  md:mx-8">
