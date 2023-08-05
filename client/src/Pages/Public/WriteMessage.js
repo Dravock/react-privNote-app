@@ -42,14 +42,13 @@ function WriteMessage(props) {
     const showPopUp = (popUp_State) => {
         switch (popUp_State) {
             case "error":
-                const get_pop_up_warning = document.getElementById('pn_warning_pop_up')
+                const get_pop_up_warning = document.getElementById('pn_error_pop_up')
                 get_pop_up_warning.classList.remove('hidden')
                 break;
             case "warning":
-                const get_pop_up_error = document.getElementById('pn_error_pop_up')
+                const get_pop_up_error = document.getElementById('pn_warning_pop_up')
                 get_pop_up_error.classList.remove('hidden')
                 break;
-        
             default:
                 break;
         }
@@ -63,17 +62,14 @@ function WriteMessage(props) {
             case "error":
                 const get_pop_up_window = document.getElementById('pn_error_pop_up')
                 get_pop_up_window.classList.add('hidden')
-                setPopWindowStatus({...pop_window_status,error:false})
                 break;
             case "warning":
                 const get_pop_up_window2 = document.getElementById('pn_warning_pop_up')
                 get_pop_up_window2.classList.add('hidden')
-                setPopWindowStatus({...pop_window_status,warning:false})
                 break;
             case "success":
                 const get_pop_up_window3 = document.getElementById('pn_success_pop_up') ?? null
                 get_pop_up_window3.classList.add('hidden')
-                setPopWindowStatus({...pop_window_status,success:false})
                 break;
             default:
                 break;
@@ -96,11 +92,9 @@ function WriteMessage(props) {
                 })
                 setShowLinkPage(true)
             }else{
-                setPopWindowStatus({...pop_window_status,warning:true})
                 showPopUp('warning')
             }
         }else{
-            setPopWindowStatus({...pop_window_status,error:true})
             showPopUp('error')
         }
     }

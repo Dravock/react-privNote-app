@@ -12,16 +12,21 @@ function App() {
   let counter = 0
 
   useEffect(() => {
+    
     if(counter === 0) {
       for (var p of searchParams) {
         if(p[0] === 'http://localhost:3000/?id' && p[1] !== "") {
           setLinkID({id: p[1]})
-          setPage({start: false, writeMessage: false , readMessage: true})
-          counter ++
+          setPage({...page,readMessage: true, start: false})
+          counter ++  
+        }else if(p[0] === 'http://localhost:3000/?response' && p[1] === "") {
+          setPage({...page, writeMessage:true, start: false})
+          counter ++  
         }
+              
       }
     }
-  }, [searchParams , counter]);
+  }, []);
 
   const render_start = () => {
     if(page.start) {
@@ -37,7 +42,7 @@ function App() {
 
   const render_read_message = () => {
     if(page.readMessage) {
-      return <ReadMessage setPage={setPage} message_id={linkID}/>
+      return <ReadMessage setPage={setPage} page={page} message_id={linkID} />
     }
   }  
 

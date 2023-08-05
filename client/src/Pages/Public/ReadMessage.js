@@ -6,7 +6,7 @@ import LoadingMessages from '../../includes/enums/LoadingMessages'
 import Content from '../../includes/enums/app/Content'
 
 function ReadMessage(props) {
-  const { message_id } = props
+  const { message_id ,setPage,page} = props
 
   const [loading,setLoading] = useState(LoadingState.Inactive)
   const [loadingText,setLoadingText]=useState(LoadingMessages.GeneralWaiting)
@@ -43,7 +43,16 @@ function ReadMessage(props) {
   const close_window = (e) => {
     e.preventDefault()
     window.close()
+  }
 
+  const responseMessge = () => {
+    const url = new URL(window.location.href);
+    const params = new URLSearchParams(url.search);
+    console.log(params.get); // 1
+    params.delete("?id=");
+    window.location.href = "http://localhost:3000/?response";
+    
+    //setPage({...page, writeMessage: true})
   }
 
   useEffect(() => {
@@ -54,22 +63,25 @@ function ReadMessage(props) {
   return (
     <>
       {loading === LoadingState.Active && <LoadingScreen text={loadingText}/>}
-      <main>
-        <section className='bg-gradient-to-b from-blue-500 to-blue-700 rounded-t-lg'>
-          <header className=''>
-            <h1 className=''>{pageContent.header}</h1>
+      <main className='bg-gradient-to-t from-green-400 to-green-800 '>
+        <section className='w-full bg-gradient-to-b from-blue-500 to-blue-700 rounded-t-lg px-1 md:px-40'>
+          <header className='py-4 '>
+            <h1 className='text-xl font-bold text-white px-10'>{pageContent.header}</h1>
           </header>
         </section>
         
-        <section>
-          <div className='flex w-full bg-[#222222c0] md:min-h-40 mx-auto text-left flex-wrap px-2 py-3'>
+        <section className='md:px-5 mt-8'>
+          <h2 className='font-bold text-left mb-2 px-1'>Deine Nachricht:</h2>
+          <div className='flex w-full bg-[#222222a1] md:min-h-40 mx-auto text-left flex-wrap px-2 py-3 rounded-xl'>
             <p className='text-white'>{data && data.message }</p>
           </div>
         </section>
         <section>
           <div className='pn__button-group mt-4 '>
-            <a href={process.env.REACT_APP_BASE_URL} className='pn__btn rounded-lg pt-3'><span className='text-2xl md:text-3xl mt-8'>🏠</span> Zur Startseite</a>
-            <button className='pn__btn bg-red-700/50 rounded-lg pt-3' onClick={()=>close_window()}>Fenster Schließen</button>
+            <a href={process.env.REACT_APP_BASE_URL} className='relative pn__btn rounded-lg pr-12'>
+              <span className='absolute top-0 right-3 text-xl md:text-2xl'>🏠</span> Zur Startseite
+            </a>
+            <button className='relative pn__btn rounded-lg bg-blue-500' onClick={()=>responseMessge()}>Antworten</button>
           </div>
         </section>
       </main>

@@ -3,14 +3,11 @@
     bg-blue-500
     hover:bg-blue-400  
     text-white
-    text-base 
-    sm:text-lg
-
     sm:font-bold 
     p-2
     sm:m-5
     m-1
-    rounded-sm;
+    ;
 }
 
 .pn__btn--green {

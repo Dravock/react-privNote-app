@@ -40,8 +40,8 @@ return (
     <main className='text-left sm:text-center'>
         <section id="pn_start_header ">
             <header className="bg-gradient-to-b from-blue-500 to-blue-700 text-white text-center  rounded-t-lg px-0 s md:32 lg:px-52">
-                <h1 className='text-2xl md:text-2xl mx-2 lg:text-3xl font-bold'>{pageContent.header.part_1} <span className='font-bold text-green-400 inset-5'>{pageContent.header.part_2}</span></h1>
-                <p className="sm:text-sm mt-2 mx-4">{pageContent.header.subHeader}</p>
+                <h1 className='text-2xl md:text-2xl mx-2 lg:text-3xl pt-2 font-bold'>{pageContent.header.part_1} <span className='font-bold text-green-400 inset-5'>{pageContent.header.part_2}</span></h1>
+                <p className="sm:text-sm mt-2 pb-2 mx-4">{pageContent.header.subHeader}</p>
             </header>
         </section>
         
