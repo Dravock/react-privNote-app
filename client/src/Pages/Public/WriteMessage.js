@@ -31,6 +31,31 @@ function WriteMessage(props) {
         const number2 = Math.floor(Math.random(1)*10)
         console.log(number1,number2)
         setCaptachNumber({...captachNumber,number1:number1,number2:number2,result:number1+number2})
+        resetCaptcha()
+    }
+
+    const resetCaptcha = () => {
+        const get_captacha_val = document.getElementById('pn_smart_captacha')
+        get_captacha_val.value = ''
+    }
+
+    const closePopUp = (page) => {
+        switch (page) {
+            case "error":
+                const get_pop_up_window = document.getElementById('pn_error_pop_up')
+                get_pop_up_window.classList.add('hidden')
+                break;
+            case "warning":
+                const get_pop_up_window2 = document.getElementById('pn_warning_pop_up')
+                get_pop_up_window2.classList.add('hidden')
+                break;
+            case "success":
+                const get_pop_up_window3 = document.getElementById('pn_success_pop_up') ?? null
+                get_pop_up_window3.classList.add('hidden')
+                break;
+            default:
+                break;
+        }
     }
 
     const submit = async (e) =>{
@@ -63,9 +88,9 @@ console.log(message)
 return (
     <>
         {!showLinkPage ? 
-                <CreateMessageLink changePage={changePage} getMessageLink={()=>getMessageLink()} setMessge={setMessge} message={message} submit={submit} generateCaptchaNr={generateCaptchaNr} captachNumber={captachNumber}/> 
+                <CreateMessageLink changePage={changePage} getMessageLink={()=>getMessageLink()} setMessge={setMessge} message={message} submit={submit} generateCaptchaNr={generateCaptchaNr} captachNumber={captachNumber} closePopUp={closePopUp}/> 
                 : 
-                <ShowLink link_id={link} loading={loading} loadingText={loadingText}/> 
+                <ShowLink link_id={link} loading={loading} loadingText={loadingText} closePopUp={closePopUp}/> 
         }
     </>
 

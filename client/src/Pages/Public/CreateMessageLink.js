@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import Content from '../../includes/enums/app/Content'
 
 function CreateMessageLink(props) {
-    const { changePage,getMessageLink ,message,setMessge,submit,generateCaptchaNr,captachNumber} = props
+    const { changePage,getMessageLink ,message,setMessge,submit,generateCaptchaNr,captachNumber,closePopUp} = props
     const [pageContent,setPageContent] = React.useState(Content.WriteMessage)
 
     useEffect(() => {
@@ -15,17 +15,6 @@ function CreateMessageLink(props) {
         setMessge({...message,[name]:value})
     }
 
-    const closePopUp = () => {
-        const get_pop_up_window = document.getElementById('pn_error_pop_up')
-        const get_pop_up_window2 = document.getElementById('pn_warning_pop_up')
-        const get_captacha_val = document.getElementById('pn_smart_captacha')
-        get_captacha_val.value = ''
-        get_pop_up_window.classList.add('hidden')
-        get_pop_up_window2.classList.add('hidden')
-    }
-
-
-
     return (
     <div className=''>
         <section className='description bg-gradient-to-b from-blue-500 to-blue-700 rounded-t-lg'>        
@@ -36,13 +25,13 @@ function CreateMessageLink(props) {
         <section id="pn_error_pop_up" className='pb-8 hidden'>
             <div className='h-full w-full bg-red-600 flex justify-center items-center'>
                 <h2 className='text-xl md:text-3xl font-bold px-4 md:px-8 pb-4 pt-4'>Du kannst keine Leere Nachricht erstellen!</h2>
-                <button className='text-4xl cursor-pointer font-extrabold' onClick={()=>closePopUp()}>X</button>
+                <button className='text-4xl cursor-pointer font-extrabold' onClick={()=>closePopUp("error")}>X</button>
             </div>
         </section>
         <section id="pn_warning_pop_up" className='pb-8 hidden'>
             <div className='h-full w-full bg-yellow-600 flex justify-center items-center'>
                 <h2 className='text-xl md:text-3xl font-bold px-4 md:px-8 pb-4 pt-4'>Authentifikation fehlgelschagen nochmal versuchen</h2>
-                <button className='text-4xl cursor-pointer font-extrabold' onClick={()=>closePopUp()}>X</button>
+                <button className='text-4xl cursor-pointer font-extrabold' onClick={()=>closePopUp("warning")}>X</button>
             </div>
         </section>
         <section className='pt-8 pb-8'>

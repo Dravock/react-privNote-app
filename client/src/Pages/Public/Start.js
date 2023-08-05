@@ -4,7 +4,7 @@ import Content from '../../includes/enums/app/Content.js'
 function Start(props) {
     const { setPage } = props
 
-    const [pageContent, setPageContent] = useState(Content.Startseite)
+    const pageContent = Content.Startseite
     const [detailOptions, setDetailOptions] = useState();
 
 

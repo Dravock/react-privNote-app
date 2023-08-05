@@ -32,7 +32,7 @@ const Content = {
     ShowMessageURL: {
         header_part_1:"Hier ist dein ",
         header_part_2:"Geheimer Link,",
-        subHeader:"Sende diesen Link an den Empfänger nach dem öffnen werden wird die Nachricht gelöscht"
+        subHeader:"Sende diesen Link an den Empfänger. Nach dem öffnen wird die Nachricht für immer gelöscht"
     }
 }       
 
