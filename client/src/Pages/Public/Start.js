@@ -48,12 +48,12 @@ return (
         <div id="pn_section_body" className='px-4 md:px-8'>
         {detailOptions && detailOptions.map((option,index) => {
             if(index === 0){
-                return  <section key={index} className='mb-4 mt-4 flex justify-center' id={`pn_start_toggle-${index}`}>          
+                return  <section key={index} className='mb-4 mt-12 flex justify-center' id={`pn_start_toggle-${index}`}>          
                             <details  className="bg-slate-300/50 shadow-xl rounded-t-lg w-full" open>
                                 <summary  className='bg-green-400 hover:bg-green-400/80 rounded-t-2xl shadow-xl py-1 sm:py-3 px-8 sm:px-8 ' onClick={(e)=>toggleDetail(e)} id={`summary-${index}`}>
                                     <h2 className='font-bold text-md sm:text-xl inset-6 '>{option.props.children.summary}</h2>
                                 </summary>
-                                <div className='px-5 py-4 border-2 border-r-green-400 border-l-green-400 border-b-green-400 border-t-green-400'>
+                                <div className='px-5 pt-6 pb-9 border-2 border-r-green-400 border-l-green-400 border-b-green-400 border-t-green-400'>
                                     <p className='text-left'>{option.props.children.text}</p>
                                 </div>
                             </details>
@@ -74,8 +74,8 @@ return (
         }
         </div>
         <section id="pn_start_btn">
-            <div className='flex justify-center items-center'>
-                <button className="pn__btn rounded-lg mt-0 mb-4" onClick={()=>changePage()}>
+            <div className='flex justify-center items-center max-h-screen'>
+                <button className="pn__btn rounded-lg mt-0 mb-6" onClick={()=>changePage()}>
                     Nachricht schreiben <span className='text-xl md:text-2xl'>🎉</span>
                 </button>
             </div>

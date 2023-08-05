@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import ShowLink from './ShowMessageLink'
 import CreateMessageLink from './CreateMessageLink'
 import axios from 'axios'
@@ -6,7 +6,7 @@ import LoadingState from '../../includes/enums/LoadingState'
 import LoadingMessages from '../../includes/enums/LoadingMessages'
 
 function WriteMessage(props) {
-    const { setPage} = props
+    const { setPage,setPopUpState,popUpState} = props
     const [message,setMessge] = useState({message:''})
     const [link,setLink] = useState('')
 
@@ -17,6 +17,10 @@ function WriteMessage(props) {
 
     const [captachNumber,setCaptachNumber] = useState({number1:0,number2:0,result:0})
     const [pop_window_status,setPopWindowStatus] = useState({error:false,warning:false,success:false})
+
+    useEffect(() => {
+        setPopUpState(true)
+    }, [setPopUpState]);
 
     const changePage = () => {
         setPage({start: true, writeMessage: false , readMessage: false})
@@ -52,9 +56,6 @@ function WriteMessage(props) {
             default:
                 break;
         }
-
-        
-        
     }
 
     const closePopUp = (page) => {
