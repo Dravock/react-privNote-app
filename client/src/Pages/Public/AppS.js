@@ -21,7 +21,7 @@ function App() {
         }
       }
     }
-  }, []);
+  }, [searchParams , counter]);
 
   const render_start = () => {
     if(page.start) {
@@ -42,7 +42,7 @@ function App() {
   }  
 
 return (
-  <div className="App container">
+  <div className="App ">
     { render_start() }
     { render_write_message()}
     { render_read_message()}

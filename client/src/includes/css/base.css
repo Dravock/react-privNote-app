@@ -17,12 +17,17 @@
     --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 }
 
+html{
+    height: 100vh;
+}
+
 body {
+    @apply 
+    h-full sm:h-[100%]; 
     background-color: rgba(0, 0, 0, 0.87);
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;

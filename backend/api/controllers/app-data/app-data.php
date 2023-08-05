@@ -79,6 +79,7 @@ function removeMessage () {
             return;
         }
         http_response_code(200);
+        echo "Message deleted";
     } catch (Throwable $e) {
         http_response_code(404);
     }

@@ -9,6 +9,15 @@
   pointer-events: none;
 }
 
+summary {
+  display: flex!important ;
+  cursor: pointer;
+}
+
+summary::marker {
+  color: var(--primary-color);
+}
+
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;

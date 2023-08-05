@@ -3,7 +3,6 @@ import ShowLink from './ShowMessageLink'
 import CreateMessageLink from './CreateMessageLink'
 import axios from 'axios'
 import LoadingState from '../../includes/enums/LoadingState'
-import LoadingScreen from '../../components/loading_spinner/Loadingscreen'
 import LoadingMessages from '../../includes/enums/LoadingMessages'
 
 function WriteMessage(props) {
@@ -23,6 +22,11 @@ function WriteMessage(props) {
 
     const getMessageLink = () => {
         setLoading(LoadingState.Active)
+        if(message.message === '' || message.message === undefined) {
+            alert('Bitte eine Nachricht eingeben')
+            return
+        }
+
         axios.post(process.env.REACT_APP_BASE_URL_BACKEND+'/app-data/app-data.php',message)
         .then(res => {
             setLink(res.data)
@@ -36,9 +40,9 @@ function WriteMessage(props) {
     }
 
 return (
-    <div className=''>
+    <>
         {!showLinkPage ? <CreateMessageLink changePage={()=>changePage()} getMessageLink={()=>getMessageLink()} setMessge={setMessge} message={message}/> : <ShowLink link_id={link} loading={loading} loadingText={loadingText}/> }
-    </div>
+    </>
 
 )}
 
