@@ -3,7 +3,7 @@ import Start from './Start'
 import WriteMessage from './WriteMessage'
 import ReadMessage from './ReadMessage'
 import Footer from '../../components/Footer/Footer'
-import PopUp_Werbung from '../../components/WerbungPopUp/PopUp_Werbung'
+import PopUp_Werbung from '../../components/WerbungPopUp/PopUpWerbung'
 
 
 function App() {
@@ -40,7 +40,7 @@ function App() {
 
   const render_write_message = () => {
     if(page.writeMessage) {
-      return <WriteMessage setPage={setPage} popUpState={popUpState} close_werbung={close_werbung} setPopUpState={setPopUpState} />
+      return <WriteMessage setPage={setPage} close_werbung={close_werbung} setPopUpState={setPopUpState}  popUpState={popUpState}/>
     }
   }
 
@@ -56,6 +56,12 @@ function App() {
     }
   }
 
+  const render_footer_block = () => {
+    if(!popUpState){
+      return <Footer />
+    }
+  }
+
   const close_werbung = () => {
     setPopUpState(false)
   }
@@ -68,7 +74,7 @@ return (
     { render_write_message()}
     { render_read_message()}
   </div>
-    <Footer />
+    {render_footer_block()}
   </>
 )}
 

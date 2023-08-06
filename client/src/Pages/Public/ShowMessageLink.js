@@ -1,12 +1,17 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import LoadingState from '../../includes/enums/LoadingState';
 import LoadingScreen from '../../components/loading_spinner/Loadingscreen';
 import Content from '../../includes/enums/app/Content';
 
 function ShowLink(props) {
-  const { link_id,loading,loadingText ,closePopUp } = props
+  const { link_id,loading,loadingText ,closePopUp,popUpState ,  setPopUpState  } = props
 
   const [pageContent,setPageContent] = useState(Content.ShowMessageURL)
+
+
+  useEffect(() => {
+    setPopUpState(true)
+}, [setPopUpState]);
 
   const copy_to_clipboard = () => {
     const copyText = document.getElementById("pn_copy_clip");
@@ -31,9 +36,9 @@ function ShowLink(props) {
         </section>
 
         <section id="pn_success_pop_up" className=' hidden'>
-            <div className='h-full w-full bg-green-500 flex justify-center items-center'>
+            <div className='relative h-full w-full bg-green-500 flex justify-center items-center'>
                 <h2 className='text-lg md:text-1xl font-bold px-4 md:px-8 pb-4 pt-4 text-white'>Link in Zwischenablage kopiert</h2>
-                <button className='text-4xl cursor-pointer font-extrabold' onClick={()=>closePopUp("success")}>X</button>
+                <button className='absolute right-10 text-3xl cursor-pointer  text-white' onClick={()=>closePopUp("success")} >X</button>
             </div>
         </section>
 

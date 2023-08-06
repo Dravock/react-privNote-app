@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, {useState } from 'react'
 import ShowLink from './ShowMessageLink'
 import CreateMessageLink from './CreateMessageLink'
 import axios from 'axios'
@@ -6,7 +6,7 @@ import LoadingState from '../../includes/enums/LoadingState'
 import LoadingMessages from '../../includes/enums/LoadingMessages'
 
 function WriteMessage(props) {
-    const { setPage,setPopUpState,popUpState} = props
+    const { setPage , popUpState ,  setPopUpState } = props
     const [message,setMessge] = useState({message:''})
     const [link,setLink] = useState('')
 
@@ -18,9 +18,6 @@ function WriteMessage(props) {
     const [captachNumber,setCaptachNumber] = useState({number1:0,number2:0,result:0})
     const [pop_window_status,setPopWindowStatus] = useState({error:false,warning:false,success:false})
 
-    useEffect(() => {
-        setPopUpState(true)
-    }, [setPopUpState]);
 
     const changePage = () => {
         setPage({start: true, writeMessage: false , readMessage: false})
@@ -44,14 +41,15 @@ function WriteMessage(props) {
     }
 
     const showPopUp = (popUp_State) => {
+        let get_pop_up_warning = document.getElementById('pn_error_pop_up')
+        let get_pop_up_error = document.getElementById('pn_warning_pop_up')
         switch (popUp_State) {
             case "error":
-                const get_pop_up_warning = document.getElementById('pn_error_pop_up')
                 get_pop_up_warning.classList.remove('hidden')
                 break;
             case "warning":
-                const get_pop_up_error = document.getElementById('pn_warning_pop_up')
                 get_pop_up_error.classList.remove('hidden')
+
                 break;
             default:
                 break;
@@ -105,7 +103,7 @@ return (
         {!showLinkPage ? 
                 <CreateMessageLink changePage={changePage} getMessageLink={()=>getMessageLink()} setMessge={setMessge} message={message} submit={submit} generateCaptchaNr={generateCaptchaNr} captachNumber={captachNumber} closePopUp={closePopUp} setPopWindowStatus={setPopWindowStatus} pop_window_status={pop_window_status}/> 
                 : 
-                <ShowLink link_id={link} loading={loading} loadingText={loadingText} closePopUp={closePopUp} setPopWindowStatus={setPopWindowStatus} pop_window_status={pop_window_status}/> 
+                <ShowLink link_id={link} loading={loading} loadingText={loadingText} closePopUp={closePopUp}  setPopUpState={setPopUpState}  popUpState={popUpState}/> 
         }
     </main>
 

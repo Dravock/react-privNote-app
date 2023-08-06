@@ -2,9 +2,8 @@ import React from 'react'
 
 function Datenschutz() {
     return (
-        <div>
-
-            <h1>Datenschutzrichtlinie</h1>
+        <div className='bg-white'>
+            <h1 className='text-3xl font-bold'>Datenschutzrichtlinie</h1>
             <p><strong>Zuletzt aktualisiert:</strong> 15. Mai 2022</p>
 
             <p>Bei Pirvnota wird Datenschutz sehr ernst genommen, da der Hauptzweck der Website darin besteht, ihn zu wahren. Diese Richtlinie legt die von Pirvnota ergriffenen Maßnahmen zum Schutz der Privatsphäre ihrer Benutzer dar.</p>
