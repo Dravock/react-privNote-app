@@ -1,3 +1,0 @@
-<?php
-
-// feature kommt noch 
