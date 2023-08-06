@@ -3,6 +3,8 @@
 @tailwind utilities;
 
 /* CUSTOM CSS IMPORTS */
+@import "includes/css/custom/Variables.css";
+@import "includes/css/custom/AddToHomeScreenSytle.css";
 @import "includes/css/custom/App-Start.css"; 
 @import "includes/css/custom/buttons.css"; 
 @import "includes/css/base.css"; 
