@@ -19,7 +19,7 @@ function App() {
     
     if(counter === 0) {
       for (var p of searchParams) {
-        if(p[0] === 'http://localhost:3000/?id' && p[1] !== "") {
+        if(p[0] === `${process.env.REACT_APP_BASE_URL_PARAM_ID}` && p[1] !== "") {
           setLinkID({id: p[1]})
           setPage({...page,readMessage: true, start: false})
           counter ++  

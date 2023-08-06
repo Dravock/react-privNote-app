@@ -9,7 +9,7 @@ function Router() {
 
 return (
     <>
-        <BrowserRouter basename='/'>
+        <BrowserRouter basename='/privmes'>
             {/* REACT ROUTER ROUTES */}
             <Routes>
                 {/* PUBLIC PAGES */}
