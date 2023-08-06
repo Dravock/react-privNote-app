@@ -68,7 +68,7 @@ function App() {
 return (
   <>
     {render_werbung()}
-  <div className="App  md:mx-8">
+  <div className="App  h-screen md:h-fit overflow-hidden">
     { render_start() }
     { render_write_message()}
     { render_read_message()}
