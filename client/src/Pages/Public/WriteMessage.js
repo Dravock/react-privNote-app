@@ -7,7 +7,7 @@ import LoadingMessages from '../../includes/enums/LoadingMessages'
 
 function WriteMessage(props) {
     const { setPage , popUpState ,  setPopUpState } = props
-    const [message,setMessge] = useState({message:''})
+    const [message,setMessge] = useState({message:'',options:{}})
     const [link,setLink] = useState('')
 
     const [loading,setLoading] = useState(LoadingState.Inactive)
@@ -32,7 +32,7 @@ function WriteMessage(props) {
         const number2 = Math.floor(Math.random(1)*10)
 
         setCaptachNumber({...captachNumber,number1:number1,number2:number2,result:number1+number2})
-        resetCaptcha()
+        // resetCaptcha()
     }
 
     const resetCaptcha = () => {

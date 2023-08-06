@@ -8,17 +8,23 @@ function Footer() {
       switch (mode) {
         case 'about_us':
           return FooterLinks.links_1.map((item,index)=>{
-            return (
-              <li key={`about-us-link-${index}`} className='text-white text-sm hover:text-green-400 cursor-pointer' tabIndex={1}>
-                <a >{item.name}</a>
-              </li>
-            )
-          })
+              if(item.name === 'GitHub') {
+                return <li key={`about-us-link-${index}`} className='text-white text-sm hover:text-green-400 cursor-pointer' tabIndex={1}>
+                  <a href={item.link} >{item.name}</a>
+                </li>
+            }else{
+              return (
+                <li key={`about-us-link-${index}`} className='text-white text-sm hover:text-green-400 cursor-pointer' tabIndex={1}>
+                  <a href={item.link} >{item.name}</a>
+                </li>
+              )
+          }})
+
         case 'page-links':
           return FooterLinks.links_2.map((item,index)=>{
             return (
               <li key={`page-links-${index}`}  className='text-white text-sm hover:text-green-400 cursor-pointer' tabIndex={1}>
-                <a >{item.name}</a>
+                <a href={item.link}>{item.name}</a>
               </li>
             )
           })

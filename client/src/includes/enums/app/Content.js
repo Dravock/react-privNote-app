@@ -27,9 +27,27 @@ const Content = {
         },
     },    
     WriteMessage: {
+        details: {
+            detail_1: {
+                summary: 'Grund Einstellungen',
+            },
+            detail_2: {
+                summary: 'Advanced Einstellungen',
+            },
+
+        },
         header: 'Legen wir los mit deiner Nachricht 😁',
     },
     ShowMessageURL: {
+        details: {
+            detail_1: {
+                summary: 'Wie funktioniert es?',
+            },
+            detail_2: {
+                summary: 'Wizgjztufks?',
+            },
+
+        },
         header_part_1:"Hier ist dein ",
         header_part_2:"Geheimer Link,",
         subHeader:"Sende diesen Link an den Empfänger. Nach dem öffnen wird die Nachricht für immer gelöscht"
