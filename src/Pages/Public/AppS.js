@@ -19,7 +19,6 @@ function App() {
     
     if(counter === 0) {
       for (var p of searchParams) {
-        console.log(p[0] + " " + p[1]);
         if(p[0] === `${process.env.REACT_APP_BASE_URL_PARAM_ID}` && p[1] !== "") {
           setLinkID({id: p[1]})
           setPage({...page,readMessage: true, start: false})
@@ -28,7 +27,6 @@ function App() {
           setPage({...page, writeMessage:true, start: false})
           counter ++  
         }
-              
       }
     }
   }, []);
