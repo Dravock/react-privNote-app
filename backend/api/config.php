@@ -9,5 +9,4 @@
         
         // Tabellennamen
         public static $app_data = 'app_data';
-
     }

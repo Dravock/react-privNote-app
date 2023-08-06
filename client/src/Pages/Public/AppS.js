@@ -23,7 +23,7 @@ function App() {
           setLinkID({id: p[1]})
           setPage({...page,readMessage: true, start: false})
           counter ++  
-        }else if(p[0] === 'http://localhost:3000/?response' && p[1] === "") {
+        }else if(p[0] === `${process.env.REACT_APP_BASE_URL_RESPONSE}` && p[1] === "") {
           setPage({...page, writeMessage:true, start: false})
           counter ++  
         }
