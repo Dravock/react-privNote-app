@@ -86,7 +86,7 @@ function WriteMessage(props) {
                     setLoading(LoadingState.Inactive)
                 })
                 .catch(err => {
-                    console.log("Ein Fehler beim abfragen: ", err)
+                    console.log("Ein Fehler beim absenden der Linkdaten ist aufgetreten: ", err)
                     setLoading(LoadingState.Inactive)
                 })
                 setShowLinkPage(true)

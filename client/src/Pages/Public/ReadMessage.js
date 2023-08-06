@@ -20,7 +20,7 @@ function ReadMessage(props) {
       console.log(response.data,'Statuscode:',response.status)
     })
     .catch((err)=>{
-      console.log("Ein Fehler beim abfragen: ", err)
+      console.log("Ein Fehler beim Löschen ist aufgetreten: ", err)
     })
   }
 
@@ -30,13 +30,13 @@ function ReadMessage(props) {
     .then((response)=>{
       if(response.data[0].message !== undefined){
         setData(response.data[0])
-        // delete_message()
+        delete_message()
       }
       setLoading(LoadingState.Inactive)
       return
     })
     .catch((err)=>{
-      window.location.href = "http://localhost:3000/";
+      window.location.href = process.env.REACT_APP_BASE_URL;
     })
   }
 
@@ -47,12 +47,10 @@ function ReadMessage(props) {
 
   const responseMessge = () => {
     const url = new URL(window.location.href);
-    const params = new URLSearchParams(url.search);
-    console.log(params.get); // 1
+    const params = new URLSearchParams(url.search); 
     params.delete("?id=");
-    window.location.href = "http://localhost:3000/?response";
-    
-    //setPage({...page, writeMessage: true})
+    window.location.href = process.env.REACT_APP_BASE_URL_RESPONSE;
+
   }
 
   useEffect(() => {

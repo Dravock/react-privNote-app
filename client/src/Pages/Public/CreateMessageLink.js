@@ -57,8 +57,6 @@ function CreateMessageLink(props) {
         }})
     }
 
-    console.log(message)
-
     return (
     <>
         <section className='description bg-gradient-to-b from-blue-500 to-blue-700 rounded-t-lg px-10 md:px-20 '>        
