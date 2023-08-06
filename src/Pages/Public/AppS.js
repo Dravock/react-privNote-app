@@ -4,6 +4,7 @@ import WriteMessage from './WriteMessage'
 import ReadMessage from './ReadMessage'
 import Footer from '../../components/Footer/Footer'
 import PopUp_Werbung from '../../components/WerbungPopUp/PopUpWerbung'
+import AddToHomeScreenComp from '../../components/ATH/AddToHomeScreen'
 
 
 function App() {
@@ -30,6 +31,8 @@ function App() {
       }
     }
   }, []);
+
+
 
   const render_start = () => {
     if(page.start) {
@@ -69,6 +72,7 @@ return (
   <>
     {render_werbung()}
   <div className="App  h-screen md:h-fit overflow-hidden">
+    <AddToHomeScreenComp />
     { render_start() }
     { render_write_message()}
     { render_read_message()}
