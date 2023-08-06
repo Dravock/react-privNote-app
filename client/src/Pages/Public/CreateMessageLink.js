@@ -6,7 +6,8 @@ function CreateMessageLink(props) {
  
     const { changePage,message,setMessge,submit,generateCaptchaNr,captachNumber,closePopUp} = props
     const [pageContent,setPageContent] = useState(Content.WriteMessage)
-    const [checkboxState,setCheckboxState] = useState(false)
+    const [checkboxPWState,setCheckboxPWState] = useState(false)
+    const [checkboxMailState,setCheckboxMailState] = useState(false)
     const [detailOptions, setDetailOptions] = useState();
 
     useEffect(() => {
@@ -27,12 +28,18 @@ function CreateMessageLink(props) {
         const {name,value}=e.target
         setMessge({...message,options:{...message.options,[name]:value}})
 
-        if(e.target.type === 'checkbox'){
-            setCheckboxState(!checkboxState)
+        checkboxListener(e)
+    }
+
+    const checkboxListener = (e) => {
+        if(e.target.type === 'checkbox' && e.target.name === 'pn_pw_checkbox'){
+            setCheckboxPWState(!checkboxPWState)
+        }else if(e.target.type === 'checkbox' && e.target.name === 'pn_mail_checkbox'){
+            setCheckboxMailState(!checkboxMailState)
         }
     }
 
-    console.log(message.options)
+
 
     const getDetailOption = () => {
         let detailOptions_func_arr = []
@@ -50,6 +57,7 @@ function CreateMessageLink(props) {
         }})
     }
 
+    console.log(message)
 
     return (
     <>
@@ -61,11 +69,11 @@ function CreateMessageLink(props) {
         <PopUpInfo closePopUp={closePopUp} mode={"error"}/>
 
 
-        <section className='pt-8 pb-8'>
+        <section className='pt-8 pb-8 mx-1 md:mx-8'>
             <form onSubmit={submit} className='pn__form'>
                 {detailOptions && detailOptions.map((option,index) => {
                 if(index === 0){
-                    return  <section key={index} className='mb-4  flex justify-center' id={`pn_start_toggle-${index}`}>          
+                    return  <section key={index} className='mb-8  flex justify-center' id={`pn_start_toggle-${index}`}>          
                                 <details  className="bg-slate-300/50 shadow-xl rounded-t-lg w-full" open>
                                     <summary  className='bg-green-400 hover:bg-green-400/80 rounded-t-2xl shadow-xl py-1 sm:py-3 px-8 sm:px-8 ' onClick={(e)=>toggleDetail(e)} id={`summary-${index}`}>
                                         <h2 className='font-bold text-md sm:text-xl inset-6 '>{option.props.children.summary}</h2>
@@ -82,26 +90,47 @@ function CreateMessageLink(props) {
                                 </details>
                             </section>
                 }else{
-                    return  <section key={index} className='mb-4 mt-4 flex justify-center' id={`pn_start_toggle-${index}`}>          
+                    return  <section key={index} className='mb-4 mt-8 flex justify-center' id={`pn_start_toggle-${index}`}>          
                                 <details  className="   bg-slate-300/50 shadow-xl rounded-t-lg w-full">
                                     <summary  className='bg-green-400 hover:bg-green-400/80 rounded-t-2xl shadow-xl py-1 sm:py-3 px-8 sm:px-8' onClick={(e)=>toggleDetail(e)} id={`summary-${index}`}>
                                         <h2 className='font-bold text-md sm:text-xl'>{option.props.children.summary}</h2>
                                     </summary>
                                     <div className='grid border-2 border-r-green-400 border-l-green-400 border-b-green-400 border-t-green-400 px-4' >
-                                        <span className='relative w-full h-full text-left flex items-end'>
-                                            <label htmlFor='pn_pw_checkbox' className='pt-4'>
-                                            <input type='checkbox' className='w-5 h-5 cursor-pointer mr-2' name='pn_pw_checkbox' id='pn_pw_checkbox' onChange={optionsListener}  checked={checkboxState}/>
-                                            Passwort verwenden?</label>
+                                        <span className='relative w-full h-full text-left flex items-end pt-4'>
+                                            <input type='checkbox' className='w-5 h-5 cursor-pointer mr-2' name='pn_pw_checkbox' id='pn_pw_checkbox' onChange={optionsListener}  checked={checkboxPWState}/>
+                                            <label htmlFor='pn_pw_checkbox' className='text-left font-bold'>Passwort verwenden?</label>
                                         </span>
 
-                                        {checkboxState ? <input name='pn_pw' id='pn_pw' placeholder='pw' className='border-2 border-green-400 my-4' onChange={optionsListener}/> :null}
-                                        {checkboxState ? <input name='pn_pw_rep' id='pn_pw_rep' placeholder='pw repeat' className='border-2 border-green-400' onChange={optionsListener} /> :null}
-                                        <select className='my-8' name="Speicherzeit" defaultValue={"4w"} onChange={optionsListener}>
-                                            <option value={'1h'}>1h</option>
-                                            <option value={'6h'}>6h</option>
-                                            <option value={'24h'}>24h</option>
-                                            <option value={'1w'}>1w</option>
-                                        </select>
+                                        {checkboxPWState ? <span className='flex flex-col mt-4'>
+                                                            
+                                                            <input type='password' name='pn_pw' id='pn_pw' placeholder='Passwort hier hinterlegen' className='border-2 border-green-400' onChange={optionsListener}/>
+                                                            <label htmlFor='pn_pw' className='text-left font-bold'>Passwort</label>
+                                                        </span>: null
+                                                        }
+                                        {checkboxPWState ? <span className='flex flex-col mt-4'>
+                                                            <input type='password' name='pn_pw_rep' id='pn_pw_rep' placeholder='Passwort bestätigen' className='border-2 border-green-400' onChange={optionsListener} />
+                                                            <label htmlFor='pn_pw_rep' className='text-left font-bold'>Passwort Wiederholen</label>  
+
+                                                        </span> : null
+                                                        }
+                                        <span className='flex flex-col mt-4'>
+                                            <label className='text-left font-bold'>Speicherdauer</label>
+                                            <select id="pn_delete_interval" className='' name="Speicherzeit" defaultValue={"4w"} onChange={optionsListener}>
+                                                <option value={'1h'}>1h</option>
+                                                <option value={'6h'}>6h</option>
+                                                <option value={'24h'}>24h</option>
+                                                <option value={'1w'}>1w</option>
+                                            </select>
+                                        </span>
+                                        <span className='relative w-full h-full text-left flex items-end pt-4 pb-4'>
+                                            <input type='checkbox' className='w-5 h-5 cursor-pointer mr-2' name='pn_mail_checkbox' id='pn_mail_checkbox' onChange={optionsListener}  checked={checkboxMailState} />
+                                            <label htmlFor='pn_mail_checkbox' className='text-left font-bold'>Lesebestätigung</label>
+                                        </span>
+                                        {checkboxMailState ? <span className='flex flex-col mt-4 mb-4'>
+                                                            <label htmlFor='pn_mail' className='text-left font-bold'>E-Mail Adresse:</label>
+                                                            <input type="mail" name='pn_mail' id='pn_mail' placeholder='E-Mail Adresse hinterlegen' className='border-2 border-green-400' onChange={optionsListener}/>
+                                                        </span>: null
+                                                        }
                                     </div>
                                 </details>
                             </section>
