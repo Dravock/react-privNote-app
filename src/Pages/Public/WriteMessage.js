@@ -9,19 +9,19 @@ import GenerateKeys from '../../includes/functions/GenerateKeys'
 
 function WriteMessage(props) {
     const { setPage, popUpState, setPopUpState } = props
+    
+    const secret_key =GenerateKeys.generate_random_key(25)
+
     const [message, setMessge] = useState({ message: '', options: {} })
     const [link, setLink] = useState('')
-
     const [loading, setLoading] = useState(LoadingState.Inactive)
     const [loadingText, setLoadingText] = useState(LoadingMessages.createLink)
-
     const [showLinkPage, setShowLinkPage] = useState(false)
-
     const [captachNumber, setCaptachNumber] = useState({ number1: 0, number2: 0, result: 0 })
     const [pop_window_status, setPopWindowStatus] = useState({ error: false, warning: false, success: false })
-    const [decrypted, setDecrypted] = useState({ secret: 'start01', cipher: '', decrypted: '', message: '' })
+    const [decrypted, setDecrypted] = useState({ secret: secret_key, cipher: '', decrypted: ''})
 
-    const secret_key =GenerateKeys.generate_random_key(25)
+
 
     const changePage = () => {
         setPage({ start: true, writeMessage: false, readMessage: false })
@@ -93,8 +93,7 @@ function WriteMessage(props) {
         try {
             const bytes = CryptoJS.AES.decrypt(ciphertext, secret_key);
             const originalText = bytes.toString(CryptoJS.enc.Utf8);
-
-            console.log(originalText);
+            return originalText
         } catch (error) {
             console.log("!", error);
         }
@@ -105,8 +104,8 @@ function WriteMessage(props) {
         e.preventDefault()
         const hashMessage =decryptMessage(message.message, secret_key)
         setDecrypted({ ...decrypted, cipher: hashMessage })
-
-        console.log(decrypted)
+        const messageData = encryptMessage(hashMessage, secret_key)
+        setDecrypted({ ...decrypted, decrypted: messageData })
         /*if (message.message !== '' && message.message !== undefined && message.message !== null) {
             if (captachNumber.result === parseInt(message.pn_smart_captacha)) {
                 setLoading(LoadingState.Active)
@@ -127,6 +126,8 @@ function WriteMessage(props) {
             showPopUp('error')
         }*/
     }
+
+    console.log(decrypted)
 
     return (
         <main>
