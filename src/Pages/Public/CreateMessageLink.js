@@ -4,7 +4,7 @@ import PopUpInfo from '../../components/PopUpMeldung/PopUpInfo'
 
 function CreateMessageLink(props) {
  
-    const { changePage,message,setMessge,submit,generateCaptchaNr,captachNumber,closePopUp} = props
+    const { changePage,message,setMessge,submit,generateCaptchaNr,captachNumber,closePopUp,secret_key} = props
     const [pageContent,setPageContent] = useState(Content.WriteMessage)
     const [checkboxPWState,setCheckboxPWState] = useState(false)
     const [checkboxMailState,setCheckboxMailState] = useState(false)
