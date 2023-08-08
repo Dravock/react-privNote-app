@@ -1,7 +1,3 @@
-
-
-
-
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
     -webkit-appearance: none;
@@ -46,7 +42,6 @@ body {
     border-radius: 10px;
 }
 
-
 .animteFooter-height {
     max-height: 50px;
     overflow-y: hidden;
@@ -61,8 +56,6 @@ footer .animteFooter-height-mobile{
     @apply max-h-[35rem] sm:max-h-60;
     transition: max-height 250ms ease-in;
 }
-
-
 
 footer .footer__content{
     display: none;

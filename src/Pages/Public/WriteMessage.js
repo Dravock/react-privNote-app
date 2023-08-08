@@ -83,12 +83,20 @@ function WriteMessage(props) {
     const submit = async (e) => {
         e.preventDefault()
         let encryptMessage = HashGenerator.decryptMessage(message.message, secret_key)
-
-        console.log(encryptMessage)
+        let get_options = message.options 
+        let options
+        let check_options_is_empty = Object.keys(get_options).length === 0 && get_options.constructor === Object
+        if(check_options_is_empty){
+            options = false
+        }else{
+            options = message.options
+        }
         if (message.message !== '' && message.message !== undefined && message.message !== null) {
             if (captachNumber.result === parseInt(message.pn_smart_captacha)) {
+                
+                let sendObj ={messageOptions:options,hashMessage:encryptMessage}
                 setLoading(LoadingState.Active)
-                const sendObj ={message:message,hashMessage:encryptMessage}
+                
                 axios.post(process.env.REACT_APP_BASE_URL_BACKEND + '/app-data/app-data.php', sendObj)
                     .then(res => {
                         setLink(res.data)
@@ -106,7 +114,6 @@ function WriteMessage(props) {
             showPopUp('error')
         }
     }
-
 
     return (
         <main>
