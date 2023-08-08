@@ -11,7 +11,7 @@ function App() {
 
   const [page, setPage] = useState({start: true, writeMessage: false , readMessage: false})
   const [popUpState, setPopUpState] = useState(true)
-  const [linkID, setLinkID] = useState({id:undefined})
+  const [linkID, setLinkID] = useState({id:undefined,secretKey:undefined})
   const url = new URL(window.location.href)
   const searchParams = new URLSearchParams(url.href);
   let counter = 0
@@ -21,7 +21,7 @@ function App() {
     if(counter === 0) {
       for (var p of searchParams) {
         if(p[0] === `${process.env.REACT_APP_BASE_URL_PARAM_ID}` && p[1] !== "") {
-          setLinkID({id: p[1]})
+          setLinkID({...linkID,id: p[1]})
           setPage({...page,readMessage: true, start: false})
           counter ++  
         }else if(p[0] === `${process.env.REACT_APP_BASE_URL_RESPONSE}` && p[1] === "") {

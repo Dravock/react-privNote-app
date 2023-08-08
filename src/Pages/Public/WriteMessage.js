@@ -4,7 +4,7 @@ import CreateMessageLink from './CreateMessageLink'
 import axios from 'axios'
 import LoadingState from '../../includes/enums/LoadingState'
 import LoadingMessages from '../../includes/enums/LoadingMessages'
-import CryptoJS from 'crypto-js'
+import HashGenerator from '../../includes/functions/HashGenerator'
 import GenerateKeys from '../../includes/functions/GenerateKeys'
 
 function WriteMessage(props) {
@@ -79,37 +79,17 @@ function WriteMessage(props) {
         }
     }
 
-    const decryptMessage = (userMessage = "", secret_key = "") => {
-        try {
-            const ciphertext = CryptoJS.AES.encrypt(userMessage, secret_key).toString();
-            setDecrypted({ ...decrypted, cipher: ciphertext })
-            return ciphertext
-        } catch (error) {
-            console.log(error);
-        }
-    };
-
-    const encryptMessage = (ciphertext = "", secret_key = "") => {
-        try {
-            const bytes = CryptoJS.AES.decrypt(ciphertext, secret_key);
-            const originalText = bytes.toString(CryptoJS.enc.Utf8);
-            return originalText
-        } catch (error) {
-            console.log("!", error);
-        }
-
-    }
 
     const submit = async (e) => {
         e.preventDefault()
-        const hashMessage =decryptMessage(message.message, secret_key)
-        setDecrypted({ ...decrypted, cipher: hashMessage })
-        const messageData = encryptMessage(hashMessage, secret_key)
-        setDecrypted({ ...decrypted, decrypted: messageData })
-        /*if (message.message !== '' && message.message !== undefined && message.message !== null) {
+        let encryptMessage = HashGenerator.decryptMessage(message.message, secret_key)
+
+        console.log(encryptMessage)
+        if (message.message !== '' && message.message !== undefined && message.message !== null) {
             if (captachNumber.result === parseInt(message.pn_smart_captacha)) {
                 setLoading(LoadingState.Active)
-                axios.post(process.env.REACT_APP_BASE_URL_BACKEND + '/app-data/app-data.php', message)
+                const sendObj ={message:message,hashMessage:encryptMessage}
+                axios.post(process.env.REACT_APP_BASE_URL_BACKEND + '/app-data/app-data.php', sendObj)
                     .then(res => {
                         setLink(res.data)
                         setLoading(LoadingState.Inactive)
@@ -124,10 +104,9 @@ function WriteMessage(props) {
             }
         } else {
             showPopUp('error')
-        }*/
+        }
     }
 
-    console.log(decrypted)
 
     return (
         <main>
