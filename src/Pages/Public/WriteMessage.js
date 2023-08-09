@@ -10,7 +10,7 @@ import GenerateKeys from '../../includes/functions/GenerateKeys'
 function WriteMessage(props) {
     const { setPage, popUpState, setPopUpState } = props
     
-    const secret_key =GenerateKeys.generate_random_key(8)
+    
 
     const [message, setMessge] = useState({ message: '', options: {} })
     const [link, setLink] = useState('')
@@ -19,7 +19,7 @@ function WriteMessage(props) {
     const [showLinkPage, setShowLinkPage] = useState(false)
     const [captachNumber, setCaptachNumber] = useState({ number1: 0, number2: 0, result: 0 })
     const [pop_window_status, setPopWindowStatus] = useState({ error: false, warning: false, success: false })
-    const [decrypted, setDecrypted] = useState({ secret: secret_key, cipher: '', decrypted: ''})
+
 
 
 
@@ -81,7 +81,8 @@ function WriteMessage(props) {
 
 
     const submit = async (e) => {
-        e.preventDefault()
+        e.preventDefault()        
+        const secret_key = await GenerateKeys.generate_random_key(6)
         let encryptMessage = await HashGenerator.encryptMessage(message.message, secret_key)
         let get_options = message.options 
         let options
@@ -101,7 +102,7 @@ function WriteMessage(props) {
                 
                 axios.post(process.env.REACT_APP_BASE_URL_BACKEND + '/app-data/app-data.php', sendObj)
                     .then(res => {
-                        setLink(res.data)
+                        setLink({data:res.data, key:secret_key})
                         setLoading(LoadingState.Inactive)
                     })
                     .catch(err => {
@@ -120,9 +121,9 @@ function WriteMessage(props) {
     return (
         <main>
             {!showLinkPage ?
-                <CreateMessageLink changePage={changePage} getMessageLink={() => getMessageLink()} setMessge={setMessge} message={message} submit={submit} secret_key={secret_key} generateCaptchaNr={generateCaptchaNr} captachNumber={captachNumber} closePopUp={closePopUp} setPopWindowStatus={setPopWindowStatus} pop_window_status={pop_window_status} />
+                <CreateMessageLink changePage={changePage} getMessageLink={() => getMessageLink()} setMessge={setMessge} message={message} submit={submit} generateCaptchaNr={generateCaptchaNr} captachNumber={captachNumber} closePopUp={closePopUp} setPopWindowStatus={setPopWindowStatus} pop_window_status={pop_window_status} />
                 :
-                <ShowLink link_id={link} loading={loading} loadingText={loadingText} closePopUp={closePopUp} setPopUpState={setPopUpState} popUpState={popUpState} secret_key={secret_key} />
+                <ShowLink link_id={link} loading={loading} loadingText={loadingText} closePopUp={closePopUp} setPopUpState={setPopUpState} popUpState={popUpState}  />
             }
         </main>
 

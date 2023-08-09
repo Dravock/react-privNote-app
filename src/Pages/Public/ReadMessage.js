@@ -5,6 +5,7 @@ import LoadingScreen from '../../components/loading_spinner/Loadingscreen'
 import LoadingMessages from '../../includes/enums/LoadingMessages'
 import Content from '../../includes/enums/app/Content'
 import HashGenerator from '../../includes/functions/HashGenerator'
+import CryptoJS from 'crypto-js'
 
 function ReadMessage(props) {
 
@@ -16,6 +17,7 @@ function ReadMessage(props) {
 
   const [data , setData] = useState("")
   const [pageContent,setPageContent] = useState(Content.ReadMessage)
+  const [message,setMessage] = useState("")
 
   const url = new URL(window.location.href)
   const searchParams = new URLSearchParams(url.href);
@@ -41,13 +43,13 @@ function ReadMessage(props) {
         const clean_mess = getCleanMessage(server_res)
   
         setData(response.data[0])
-        // delete_message()
+        delete_message()
       }
       setLoading(LoadingState.Inactive)
       return
     })
     .catch((err)=>{
-      // window.location.href = process.env.REACT_APP_BASE_URL;
+      window.location.href = process.env.REACT_APP_BASE_URL;
     })
   }
 
@@ -63,29 +65,25 @@ function ReadMessage(props) {
     window.location.href = process.env.REACT_APP_BASE_URL_RESPONSE;
   }
 
-  const getCleanMessage =async (decryptedMessage)=>{
-    const message = decryptedMessage.message;
+  const getCleanMessage =async (encryptedMessage)=>{
+    const message = encryptedMessage.message;
     let loop_counter = 0;
-    let secret_key 
+
+
     for (var param of searchParams) {
-    if(loop_counter <= 1){
-      secret_key = param[1];
-      // console.log("messa:",decryptedMessage.message,"key:",secret_key)
-      const decrypted_message = HashGenerator.decryptMessage(message,secret_key);
-      console.log("decrypted_message:",decrypted_message)
-    }else{
-      loop_counter ++
+      if(loop_counter <= 1){
+        let secret_key = param[1];
+        let decrypted_message = await HashGenerator.decryptMessage(message,secret_key);
+        setMessage(decrypted_message)
+      }else{
+        loop_counter ++
+      }
     }
-    }
-    
-    // 
   }
+
 
   useEffect(() => {
     get_message()
-    // const test = HashGenerator.decryptMessage("Hallo Welt","1234")
-   // const test2 = HashGenerator.encryptMessage(test,"1234")
-    //console.log("test :",test ,"test2 :",test2);
   }, [])
   
 
@@ -102,7 +100,7 @@ function ReadMessage(props) {
         <section className='md:px-5 mt-8'>
           <h2 className='font-bold text-left mb-2 px-1'>Deine Nachricht:</h2>
           <div className='flex w-full bg-[#222222a1] md:min-h-40 mx-auto text-left flex-wrap px-2 py-3 rounded-xl'>
-            <p className='text-white flex-wrap'>{data && data.message }</p>
+            <p className='text-white flex-wrap'>{data && message }</p>
           </div>
         </section>
         <section>

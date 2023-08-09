@@ -11,8 +11,6 @@ const encryptMessage = async (userMessage = "", secret_key = "") => {
 
 const decryptMessage = async (ciphertext = "", secret_key) => {
     try {
-        console.log(secret_key)
-        
         const bytes = CryptoJS.AES.decrypt(ciphertext, secret_key);
         const originalText = bytes.toString(CryptoJS.enc.Utf8);
         return originalText
