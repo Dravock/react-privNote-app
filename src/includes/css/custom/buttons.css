@@ -32,3 +32,10 @@
     m-1
     rounded-sm;
 }
+
+.pn__hov-green{
+    @apply
+    hover:bg-green-400
+    hover:text-white
+    ;
+}

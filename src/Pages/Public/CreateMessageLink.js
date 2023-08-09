@@ -4,7 +4,7 @@ import PopUpInfo from '../../components/PopUpMeldung/PopUpInfo'
 
 function CreateMessageLink(props) {
  
-    const { changePage,message,setMessge,submit,generateCaptchaNr,captachNumber,closePopUp} = props
+    const { changePage,message,setMessge,submit,generateCaptchaNr,captachNumber,closePopUp,pop_window_status} = props
     const [pageContent,setPageContent] = useState(Content.WriteMessage)
     const [checkboxPWState,setCheckboxPWState] = useState(false)
     const [checkboxMailState,setCheckboxMailState] = useState(false)
@@ -22,6 +22,20 @@ function CreateMessageLink(props) {
     const inputListener = (e) => {
         const {name,value}=e.target
         setMessge({...message,[name]:value})
+
+        if(e.target.type === 'number'){
+            const get_button = document.getElementById('pn_submit_message_btn')
+            if(captachNumber.number1 + captachNumber.number2 === parseInt(e.target.value)){
+                get_button.removeAttribute('disabled')
+                get_button.classList.add('pn__hov-green')
+            }else{
+                get_button.setAttribute('disabled',true)
+                get_button.classList.add('disabled:opacity-50')
+                get_button.classList.remove('pn__hov-green')
+            }
+
+
+        }
     }
 
     const optionsListener = (e) => {
@@ -63,8 +77,10 @@ function CreateMessageLink(props) {
             <h1 className="text-2xl md:text-4xl py-4 font-bold ">{pageContent.header}</h1>
         </section>
 
-        <PopUpInfo closePopUp={closePopUp} mode={"warning"}/>
-        <PopUpInfo closePopUp={closePopUp} mode={"error"}/>
+
+        {pop_window_status.error === true ? <PopUpInfo closePopUp={closePopUp} mode={"error"} />:null}
+        {pop_window_status.warning === true ? <PopUpInfo closePopUp={closePopUp} mode={"warning"} />:null}
+        
 
 
         <section className='pt-8 pb-8 mx-1 md:mx-8'>
@@ -73,7 +89,7 @@ function CreateMessageLink(props) {
                 if(index === 0){
                     return  <section key={index} className='mb-8  flex justify-center' id={`pn_start_toggle-${index}`}>          
                                 <details  className="bg-slate-300/50 shadow-xl rounded-t-lg w-full" open>
-                                    <summary  className='bg-green-400 hover:bg-green-400/80 rounded-t-2xl shadow-xl py-1 sm:py-3 px-8 sm:px-8 ' onClick={(e)=>toggleDetail(e)} id={`summary-${index}`}>
+                                    <summary  className='bg-green-400 hover:bg-green-400/80 rounded-t-2xl shadow-xl py-1 sm:py-3 px-8 sm:px-8' onClick={(e)=>toggleDetail(e)} id={`summary-${index}`}>
                                         <h2 className='font-bold text-md sm:text-xl inset-6 '>{option.props.children.summary}</h2>
                                     </summary>
                                     <div className='border-2 border-r-green-400 border-l-green-400 border-b-green-400 border-t-green-400 '>
@@ -95,18 +111,18 @@ function CreateMessageLink(props) {
                                     </summary>
                                     <div className='grid border-2 border-r-green-400 border-l-green-400 border-b-green-400 border-t-green-400 px-4' >
                                         <span className='relative w-full h-full text-left flex items-end pt-4'>
-                                            <input type='checkbox' className='w-5 h-5 cursor-pointer mr-2' name='pn_pw_checkbox' id='pn_pw_checkbox' onChange={optionsListener}  checked={checkboxPWState}/>
+                                            <input type='checkbox' className='w-5 h-5 cursor-pointer mr-2' name='pn_pw_checkbox' id='pn_pw_checkbox' onChange={optionsListener}  checked={checkboxPWState} />
                                             <label htmlFor='pn_pw_checkbox' className='text-left font-bold'>Passwort verwenden?</label>
                                         </span>
 
                                         {checkboxPWState ? <span className='flex flex-col mt-4'>
                                                             
-                                                            <input type='password' name='pn_pw' id='pn_pw' placeholder='Passwort hier hinterlegen' className='border-2 border-green-400' onChange={optionsListener}/>
+                                                            <input type='password' name='pn_pw' id='pn_pw' placeholder='Passwort hier hinterlegen' className='border-2 border-green-400' onChange={optionsListener} autoComplete='false'/>
                                                             <label htmlFor='pn_pw' className='text-left font-bold'>Passwort</label>
                                                         </span>: null
                                                         }
                                         {checkboxPWState ? <span className='flex flex-col mt-4'>
-                                                            <input type='password' name='pn_pw_rep' id='pn_pw_rep' placeholder='Passwort bestätigen' className='border-2 border-green-400' onChange={optionsListener} />
+                                                            <input type='password' name='pn_pw_rep' id='pn_pw_rep' placeholder='Passwort bestätigen' className='border-2 border-green-400' onChange={optionsListener} autoComplete='false'/>
                                                             <label htmlFor='pn_pw_rep' className='text-left font-bold'>Passwort Wiederholen</label>  
 
                                                         </span> : null
@@ -114,6 +130,7 @@ function CreateMessageLink(props) {
                                         <span className='flex flex-col mt-4'>
                                             <label className='text-left font-bold'>Speicherdauer</label>
                                             <select id="pn_delete_interval" className='' name="Speicherzeit" defaultValue={"4w"} onChange={optionsListener}>
+                                                <option value={""} >-- Wähle eine Option aus --</option>
                                                 <option value={'1h'}>1h</option>
                                                 <option value={'6h'}>6h</option>
                                                 <option value={'24h'}>24h</option>
@@ -141,7 +158,7 @@ function CreateMessageLink(props) {
                         <span className='relative text-xl font-bold pl-7'><span className='text-xl absolute top-0 left-0'>🔙</span> Zurück</span>
                     </button>
                     
-                    <button type='submit' className= "col-span-12 sm:col-span-6 mt-6 px-4 py-2 bg-green-600 hover:bg-green-500 text-white rounded-lg mx-2 focus:outline-none focus:ring-2 focus:ring-green-400 focus:ring-opacity-50" onClick={submit}>
+                    <button id="pn_submit_message_btn" type='submit' className= "disabled:opacity-50 col-span-12 sm:col-span-6 mt-6 px-4 py-2 bg-green-600  text-white rounded-lg mx-2 focus:outline-none focus:ring-2 focus:ring-green-400 focus:ring-opacity-50" onClick={submit} disabled>
                         <span className='relative text-xl font-bold pl-7'><span className='text-xl absolute top-0 left-0'>📝</span>Geheim Nachricht erstellen </span>
                     </button>
                 </div>
