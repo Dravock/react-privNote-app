@@ -43,7 +43,7 @@ function ReadMessage(props) {
         const clean_mess = getCleanMessage(server_res)
   
         setData(response.data[0])
-        // delete_message()
+        delete_message()
       }
       setLoading(LoadingState.Inactive)
       return

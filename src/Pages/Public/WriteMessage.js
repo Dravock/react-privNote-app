@@ -111,10 +111,10 @@ function WriteMessage(props) {
                     })
                 setShowLinkPage(true)
             } else {
-                showPopUp('warning')
+                setPopWindowStatus({ error: false, warning: true, success: false })
             }
         } else {
-            showPopUp('error')
+            setPopWindowStatus({ error: true, warning: false, success: false })
         }
     }
 
