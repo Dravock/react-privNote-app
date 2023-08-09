@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import Content from '../../includes/enums/app/Content.js'
+import Buttons from '../../includes/enums/app/ButtonTexte.js';
 
 function Start(props) {
     const { setPage } = props
@@ -76,7 +77,7 @@ return (
         <section id="pn_start_btn">
             <div className='flex justify-center items-center max-h-screen'>
                 <button className="pn__btn rounded-lg mt-0 mb-6" onClick={()=>changePage()}>
-                    Nachricht schreiben <span className='text-xl md:text-2xl'>🎉</span>
+                    {Buttons.Startseite.button.title} <span className='text-xl md:text-2xl'>{Buttons.Startseite.button.icon}</span>
                 </button>
             </div>
         </section>

@@ -2,17 +2,17 @@ const Buttons = {
         Startseite: {
                 button: {
                     title:"Nachricht schreiben", 
-                    icons: "🎉"
+                    icon: "🎉"
             }
         },
         WriteMessage:{
             button_back: {
                 title:"Zurück zur Startseite",
-                icons: "🔙"
+                icon: "🔙"
             },
             button_send: {
-                title:"Nachricht senden",
-                icons: "📝"
+                title:"Geheim Nachricht erstellen ",
+                icon: "📝"
             },
         },
     }

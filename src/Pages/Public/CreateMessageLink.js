@@ -1,6 +1,7 @@
 import React, { useEffect, useState} from 'react'
 import Content from '../../includes/enums/app/Content'
 import PopUpInfo from '../../components/PopUpMeldung/PopUpInfo'
+import Buttons from '../../includes/enums/app/ButtonTexte'
 
 function CreateMessageLink(props) {
  
@@ -155,11 +156,11 @@ function CreateMessageLink(props) {
             <section>
                 <div className='pn__button-group grid grid-cols-12 gap-x-4'>
                     <button  className="order-last sm:order-first col-span-12 sm:col-span-6 mt-6 px-4 py-2 bg-red-600 hover:bg-red-500 text-white rounded-lg mx-2 focus:outline-none focus:ring-2 focus:ring-red-400 focus:ring-opacity-50" onClick={()=>changePage()}>
-                        <span className='relative text-xl font-bold pl-7'><span className='text-xl absolute top-0 left-0'>🔙</span> Zurück</span>
+                        <span className='relative text-xl font-bold pl-7'><span className='text-xl absolute top-0 left-0'>{Buttons.WriteMessage.button_back.icon}</span> {Buttons.WriteMessage.button_back.title}</span>
                     </button>
                     
                     <button id="pn_submit_message_btn" type='submit' className= "disabled:opacity-50 col-span-12 sm:col-span-6 mt-6 px-4 py-2 bg-green-600  text-white rounded-lg mx-2 focus:outline-none focus:ring-2 focus:ring-green-400 focus:ring-opacity-50" onClick={submit} disabled>
-                        <span className='relative text-xl font-bold pl-7'><span className='text-xl absolute top-0 left-0'>📝</span>Geheim Nachricht erstellen </span>
+                        <span className='relative text-xl font-bold pl-7'><span className='text-xl absolute top-0 left-0'>{Buttons.WriteMessage.button_send.icon}</span>{Buttons.WriteMessage.button_send.title}</span>
                     </button>
                 </div>
             </section>
