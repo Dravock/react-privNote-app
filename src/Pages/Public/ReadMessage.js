@@ -43,7 +43,7 @@ function ReadMessage(props) {
         const clean_mess = getCleanMessage(server_res)
   
         setData(response.data[0])
-        delete_message()
+        // delete_message()
       }
       setLoading(LoadingState.Inactive)
       return
@@ -51,11 +51,6 @@ function ReadMessage(props) {
     .catch((err)=>{
       window.location.href = process.env.REACT_APP_BASE_URL;
     })
-  }
-
-  const close_window = (e) => {
-    e.preventDefault();
-    window.close();
   }
 
   const responseMessge = () => {
@@ -89,15 +84,15 @@ function ReadMessage(props) {
 
   return (
     <>
-      {loading === LoadingState.Active && <LoadingScreen text={loadingText}/>}
-      <main className='bg-gradient-to-t from-green-400 to-green-800 h-full md:h-auto px-8'>
+      { loading === LoadingState.Active && <LoadingScreen text={loadingText}/> }
+      <main className='bg-gradient-to-t from-green-400 to-green-800 h-full'>
         <section className='w-full bg-gradient-to-b from-blue-500 to-blue-700 rounded-t-lg px-1 md:px-40'>
           <header className='py-4 '>
             <h1 className='text-xl font-bold text-white px-10'>{pageContent.header}</h1>
           </header>
         </section>
         
-        <section className='md:px-5 mt-8'>
+        <section className='px-5 mt-8'>
           <h2 className='font-bold text-left mb-2 px-1'>Deine Nachricht:</h2>
           <div className='flex w-full bg-[#222222a1] md:min-h-40 mx-auto text-left flex-wrap px-2 py-3 rounded-xl'>
             <p className='text-white flex-wrap'>{data && message }</p>
@@ -106,9 +101,9 @@ function ReadMessage(props) {
         <section>
           <div className='pn__button-group mt-4 '>
             <a href={process.env.REACT_APP_BASE_URL} className='relative pn__btn rounded-lg pr-12'>
-              <span className='absolute top-0 right-3 text-xl md:text-2xl'>🏠</span> Zur Startseite
+            <span className='absolute top-0 right-3 text-xl md:text-2xl'>🏠</span> Zur Startseite
             </a>
-            <button className='relative pn__btn rounded-lg bg-blue-500' onClick={()=>responseMessge()}>Antworten</button>
+            <button className='relative pn__btn rounded-lg bg-blue-500 pr-12' onClick={()=>responseMessge()}>Antworten<span className='absolute top-0 right-2 text-xl md:text-2xl'>📤</span>  </button>
           </div>
         </section>
       </main>
