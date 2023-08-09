@@ -10,7 +10,7 @@ import GenerateKeys from '../../includes/functions/GenerateKeys'
 function WriteMessage(props) {
     const { setPage, popUpState, setPopUpState } = props
     
-    const secret_key =GenerateKeys.generate_random_key(25)
+    const secret_key =GenerateKeys.generate_random_key(8)
 
     const [message, setMessge] = useState({ message: '', options: {} })
     const [link, setLink] = useState('')
@@ -82,18 +82,20 @@ function WriteMessage(props) {
 
     const submit = async (e) => {
         e.preventDefault()
-        let encryptMessage = HashGenerator.decryptMessage(message.message, secret_key)
+        let encryptMessage = await HashGenerator.encryptMessage(message.message, secret_key)
         let get_options = message.options 
         let options
         let check_options_is_empty = Object.keys(get_options).length === 0 && get_options.constructor === Object
+
         if(check_options_is_empty){
             options = false
         }else{
             options = message.options
         }
+
         if (message.message !== '' && message.message !== undefined && message.message !== null) {
             if (captachNumber.result === parseInt(message.pn_smart_captacha)) {
-                
+
                 let sendObj ={messageOptions:options,hashMessage:encryptMessage}
                 setLoading(LoadingState.Active)
                 

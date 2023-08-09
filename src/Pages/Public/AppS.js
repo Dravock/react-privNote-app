@@ -71,7 +71,7 @@ function App() {
 return (
   <>
     {render_werbung()}
-  <div className="App  h-screen md:h-fit overflow-hidden">
+  <div className="App h-screen md:h-fit overflow-hidden">
     <AddToHomeScreenComp />
     { render_start() }
     { render_write_message()}

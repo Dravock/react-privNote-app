@@ -14,7 +14,7 @@ const generate_random_key = (stellen_length = 1) => {
 }
 
 const generate_random_letters = (valid_chars_string=null) => {
-        const letter = valid_chars_string ?? 'abcdefghijklmnopqrstuvwxyz?!#%$&';
+        const letter = valid_chars_string ?? 'abcdefghijklmnopqrstuvwxyz';
         const number1 = Math.floor(Math.random(1) * letter.length)
         return letter[number1]
 }
