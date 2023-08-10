@@ -15,6 +15,6 @@ jobs:
       - name: 📂 Sync files
         uses: ./
         with:
-          server: ftp.samkirkland.com
-          username: test@samkirkland.com
+          server: 81.169.252.12
+          username: kc_admin_ftp
           password: ${{ secrets.ftp_password }}
