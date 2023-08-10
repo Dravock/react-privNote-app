@@ -15,6 +15,6 @@ jobs:
       - name: 📂 Sync files
         uses: ./
         with:
-          server: 81.169.252.12
+          server: "81.169.252.12"
           username: kc_admin_ftp
           password: ${{ secrets.ftp_password }}
