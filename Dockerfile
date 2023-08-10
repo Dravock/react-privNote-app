@@ -9,7 +9,7 @@ COPY . usr/app
 WORKDIR /usr/app
 
 #install all cache app dependencies
-RUN npm install
+RUN npm instal -g npm@9.8.1
 RUN npm install react-scripts -g --silent
 # add 'usr/src/app/node_modules/.bin' to $PATH
 ENV PATH /usr/src/app/node_modules/.bin:$PATH
