@@ -7,10 +7,11 @@ function ShowLink(props) {
   const { link_id,loading,loadingText ,closePopUp,  setPopUpState } = props
 
   const [pageContent,setPageContent] = useState(Content.ShowMessageURL)
-  const secret_key = link_id.key
+  const secret_key = "&key=" + link_id.key
   const message_id = link_id.data
+  const whatsappPrefix = "whatsapp://send?text="
 
-  const whatsappLink = "whatsapp://send?text="+process.env.REACT_APP_BASE_URL_PARAM_ID_EQUAL + message_id+"&key="+secret_key
+  const whatsappLink = whatsappPrefix + "https://privmes.keskincoding.de/?id=" + message_id + secret_key
 
   console.log(whatsappLink)
 
