@@ -7,17 +7,18 @@ function ShowLink(props) {
   const { link_id,loading,loadingText ,closePopUp,  setPopUpState } = props
 
   const [pageContent,setPageContent] = useState(Content.ShowMessageURL)
-  const secret_key = "&key=" + link_id.key
+  const secret_key = "&skey=" + link_id.key
   const message_id = link_id.data
   const whatsappPrefix = "whatsapp://send?text="
 
-  const whatsappLink = whatsappPrefix + "https://privmes.keskincoding.de/?id=" + message_id + secret_key
+  const whatsappLink = whatsappPrefix + process.env.REACT_APP_BASE_URL_PARAM_ID_EQUAL + message_id + secret_key
 
   console.log(whatsappLink)
 
 
   useEffect(() => {
-    setPopUpState(true)
+    //POP UP AUSBLNDEN WENN DIESE KOMPONENTE GELADEN WIRD
+    setPopUpState(false)
 }, [setPopUpState]);
 
   const copy_to_clipboard = () => {
@@ -29,6 +30,11 @@ function ShowLink(props) {
       navigator.clipboard.writeText(link_copy);
       get_pop_up_window.classList.remove('hidden')
     }
+  }
+
+  const sendWhatsapp = (e) => {
+    e.preventDefault()
+    window.location.href = whatsappLink
   }
 
   return (
@@ -52,7 +58,7 @@ function ShowLink(props) {
         <section className='px-4 md:px-8 mb-12 mt-8'>
           <h3 className="text-xl font-bold mb-2">Dein Link:</h3>
           <div className="relative w-full bg-black/25">
-            <input readOnly={true} value={ process.env.REACT_APP_BASE_URL_PARAM_ID_EQUAL + message_id+"&key="+secret_key} id="pn_copy_clip"  className="block p-2.5 w-full z-20 text-sm text-gray-900  rounded-r-lg border-green-500 border-l-2 border-4  focus:ring-green-500 focus:border-green-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:border-blue-500" />
+            <input readOnly={true} value={ process.env.REACT_APP_BASE_URL_PARAM_ID_EQUAL + message_id+secret_key} id="pn_copy_clip"  className="block p-2.5 w-full z-20 text-sm text-gray-900  rounded-r-lg border-green-500 border-l-2 border-4  focus:ring-green-500 focus:border-green-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:border-blue-500" />
             {/*<input readOnly={true} value={ process.env.REACT_APP_BASE_URL_PARAM_ID_EQUAL + link_id+"&key="+secret_key} id="pn_copy_clip"  className="block p-2.5 w-full z-20 text-sm text-gray-900  rounded-r-lg border-green-500 border-l-2 border-4  focus:ring-green-500 focus:border-green-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:border-blue-500" /> */}
             <button  onClick={()=>copy_to_clipboard()} title="Link kopieren" className="absolute top-0 right-0 p-2.5 h-full pr-10 text-sm font-medium text-white bg-blue-700 rounded-r-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
               Kopieren <span className='absolute text-xl top-1 right-2'>✂️</span>
@@ -65,9 +71,9 @@ function ShowLink(props) {
               <a href={process.env.REACT_APP_BASE_URL} className='mx-auto w-fit md:w-full pn__btn rounded-lg col-span-12 md:col-span-6 flex justify-center align-middle relative pr-10  sm:pl-10 ' title="Startseite">
                 <span className='absolute text-2xl md:text-3x top-0 md:top-0 right-2 md:right-12'>🏠</span> Zur Startseite zurück !
               </a>
-              <a href={whatsappLink} className="mx-auto w-fit md:w-full order-first md:order-last col-span-12 md:col-span-6 pn__btn bg-[#4FCE5D] hover:bg-[#58d066d2] rounded-lg flex justify-center align-middle relative pr-10 sm:pr-14" title="Auf WhatsApp teilen">
+             {/*  <a href={whatsappLink} onClick={(e)=>sendWhatsapp(e)} className="mx-auto w-fit md:w-full order-first md:order-last col-span-12 md:col-span-6 pn__btn bg-[#4FCE5D] hover:bg-[#58d066d2] rounded-lg flex justify-center align-middle relative pr-10 sm:pr-14" title="Auf WhatsApp teilen">
                 Teilen über WhatsApp! <span className='absolute text-2xl md:text-3x top-1 md:top-1 right-2 md:right-[5.5rem] lg:right-24'>🚀</span>
-              </a>
+              </a> */}
             </div>
         </section>
       </div>

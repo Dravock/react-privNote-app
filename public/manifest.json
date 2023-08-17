@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Private Messaging Link",
+  "name": "Erstellt eine Verknüpfung zu den privaten Nachrichten Service von KSS",
   "icons": [
     {
       "src": "favicon.ico",

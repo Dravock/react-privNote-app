@@ -10,8 +10,11 @@ import AddToHomeScreenComp from '../../components/ATH/AddToHomeScreen'
 function App() {
 
   const [page, setPage] = useState({start: true, writeMessage: false , readMessage: false})
-  const [popUpState, setPopUpState] = useState(true)
   const [linkID, setLinkID] = useState({id:undefined,secretKey:undefined})
+  
+  // popUpState = true -> PopUp wird angezeigt
+  const [popUpState, setPopUpState] = useState(false)
+
   const url = new URL(window.location.href)
   const searchParams = new URLSearchParams(url.href);
   let counter = 0
