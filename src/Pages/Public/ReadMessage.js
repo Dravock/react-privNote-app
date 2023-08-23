@@ -38,11 +38,11 @@ function ReadMessage(props) {
     setLoading(LoadingState.Active)
     return axios.get(process.env.REACT_APP_BASE_URL_BACKEND+`/app-data/app-data.php?id=${message_id.id}`)
     .then((response)=>{
-      if(response.data[0].message !== undefined){
-        const server_res = response.data[0]
+      console.log(response.data);
+      if(response.data !== undefined){
+        const server_res = response.data
         const clean_mess = getCleanMessage(server_res)
-  
-        setData(response.data[0])
+        setData(response.data)
         delete_message()
       }
       setLoading(LoadingState.Inactive)
@@ -61,7 +61,7 @@ function ReadMessage(props) {
   }
 
   const getCleanMessage =async (encryptedMessage)=>{
-    const message = encryptedMessage.message;
+    const message = encryptedMessage;
     let loop_counter = 0;
 
 

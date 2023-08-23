@@ -123,7 +123,7 @@ function WriteMessage(props) {
             {!showLinkPage ?
                 <CreateMessageLink changePage={changePage} getMessageLink={() => getMessageLink()} setMessge={setMessge} message={message} submit={submit} generateCaptchaNr={generateCaptchaNr} captachNumber={captachNumber} closePopUp={closePopUp} setPopWindowStatus={setPopWindowStatus} pop_window_status={pop_window_status} />
                 :
-                <ShowLink link_id={link} loading={loading} loadingText={loadingText} closePopUp={closePopUp} setPopUpState={setPopUpState} popUpState={popUpState}  />
+                <ShowLink link_id={link} messageOptions={message.options} loading={loading} loadingText={loadingText} closePopUp={closePopUp} setPopUpState={setPopUpState} popUpState={popUpState}  />
             }
         </main>
 
